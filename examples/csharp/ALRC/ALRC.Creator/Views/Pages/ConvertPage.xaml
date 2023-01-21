@@ -1,0 +1,80 @@
+﻿<Page x:Class="ALRC.Creator.Views.Pages.ConvertPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ALRC.Creator.Views.Pages"
+      xmlns:t="clr-namespace:ALRC.Creator.Localization"
+      xmlns:viewModels="clr-namespace:ALRC.Creator.Models.ViewModels"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      d:DataContext="{d:DesignInstance viewModels:ConvertPageViewModel, IsDesignTimeCreatable = False}"
+      mc:Ignorable="d"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Title="{x:Static t:Languages.Nav_Convert}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Click="ConvertToALRC_Click" MouseRightButtonUp="ConvertFromALRC_Click" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Question" />
+                <TextBlock Grid.Row="1" FontSize="35" Text="ALRC" />
+            </Grid>
+        </Button>
+        
+        <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="FileText" />
+                <TextBlock Grid.Row="1" FontSize="35" Text="LRC" />
+            </Grid>
+        </Button>
+        
+        <Button Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Qq" />
+                <TextBlock Grid.Row="1" FontSize="35" Text="QQ Music" />
+            </Grid>
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Music" />
+                <TextBlock Grid.Row="1" FontSize="35" Text="Netease Music" />
+            </Grid>
+        </Button>
+        
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Apple" />
+                <TextBlock Grid.Row="1" FontSize="35" Text="Apple Syllable" />
+            </Grid>
+        </Button>
+    </Grid>
+</Page>

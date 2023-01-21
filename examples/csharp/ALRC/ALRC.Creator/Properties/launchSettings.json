@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ALRC.Creator": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

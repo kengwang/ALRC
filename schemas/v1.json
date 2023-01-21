@@ -1,0 +1,280 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ALRCFile",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "li": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/ALRCLyricInfo"
+        }
+      ]
+    },
+    "si": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "h": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/ALRCHeader"
+        }
+      ]
+    },
+    "l": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ALRCLine"
+      }
+    }
+  },
+  "definitions": {
+    "ALRCLyricInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lng": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "author": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "translation": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "timeline": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "transliteration": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "proofread": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "offset": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        },
+        "duration": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        }
+      }
+    },
+    "ALRCHeader": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "s": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ALRCStyle"
+          }
+        }
+      }
+    },
+    "ALRCStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "p": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/ALRCStylePosition"
+            }
+          ]
+        },
+        "c": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "t": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/ALRCStyleAccent"
+            }
+          ]
+        }
+      }
+    },
+    "ALRCStylePosition": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Undefined",
+        "Left",
+        "Center",
+        "Right"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "ALRCStyleAccent": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Normal",
+        "Background",
+        "Whisper",
+        "Emphasise"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "ALRCLine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "p": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "f": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "t": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "s": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "cm": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "tx": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "tr": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        },
+        "w": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ALRCWord"
+          }
+        }
+      }
+    },
+    "ALRCWord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "f": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "t": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "w": {
+          "type": "string"
+        },
+        "s": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    }
+  }
+}

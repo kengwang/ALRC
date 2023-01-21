@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!-- 
+      Microsoft ResX Schema 
+      
+      Version 2.0
+      
+      The primary goals of this format is to allow a simple XML format 
+      that is mostly human readable. The generation and parsing of the 
+      various data types are done through the TypeConverter classes 
+      associated with the data types.
+      
+      Example:
+      
+      ... ado.net/XML headers & schema ...
+      <resheader name="resmimetype">text/microsoft-resx</resheader>
+      <resheader name="version">2.0</resheader>
+      <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+      <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+      <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+      <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+      <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+          <value>[base64 mime encoded serialized .NET Framework object]</value>
+      </data>
+      <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+          <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+          <comment>This is a comment</comment>
+      </data>
+                  
+      There are any number of "resheader" rows that contain simple 
+      name/value pairs.
+      
+      Each data row contains a name, and value. The row also contains a 
+      type or mimetype. Type corresponds to a .NET class that support 
+      text/value conversion through the TypeConverter architecture. 
+      Classes that don't support this are serialized and stored with the 
+      mimetype set.
+      
+      The mimetype is used for serialized objects, and tells the 
+      ResXResourceReader how to depersist the object. This is currently not 
+      extensible. For a given mimetype the value must be set accordingly:
+      
+      Note - application/x-microsoft.net.object.binary.base64 is the format 
+      that the ResXResourceWriter will generate, however the reader can 
+      read any of the formats listed below.
+      
+      mimetype: application/x-microsoft.net.object.binary.base64
+      value   : The object must be serialized with 
+              : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+              : and then encoded with base64 encoding.
+      
+      mimetype: application/x-microsoft.net.object.soap.base64
+      value   : The object must be serialized with 
+              : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+              : and then encoded with base64 encoding.
+  
+      mimetype: application/x-microsoft.net.object.bytearray.base64
+      value   : The object must be serialized into a byte array 
+              : using a System.ComponentModel.TypeConverter
+              : and then encoded with base64 encoding.
+      -->
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+        <xsd:element name="root" msdata:IsDataSet="true">
+            <xsd:complexType>
+                <xsd:choice maxOccurs="unbounded">
+                    <xsd:element name="metadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" use="required" type="xsd:string"/>
+                            <xsd:attribute name="type" type="xsd:string"/>
+                            <xsd:attribute name="mimetype" type="xsd:string"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="assembly">
+                        <xsd:complexType>
+                            <xsd:attribute name="alias" type="xsd:string"/>
+                            <xsd:attribute name="name" type="xsd:string"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="data">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+                            <xsd:attribute ref="xml:space"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="resheader">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                            </xsd:sequence>
+                            <xsd:attribute name="name" type="xsd:string" use="required"/>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:choice>
+            </xsd:complexType>
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Nav_Home" xml:space="preserve">
+    <value>Nav_Home</value>
+        <comment>侧边栏主页按钮</comment>
+  </data>
+    <data name="Nav_Info" xml:space="preserve">
+    <value>Nav_LyricInfo</value>
+  </data>
+    <data name="Nav_Settings" xml:space="preserve">
+    <value>Nav_Settings</value>
+  </data>
+    <data name="LyricInfo_Author" xml:space="preserve">
+    <value>LyricInfo_Author</value>
+  </data>
+    <data name="LyricInfo_Language" xml:space="preserve">
+    <value>LyricInfo_Language</value>
+  </data>
+    <data name="LyricInfo_Translation" xml:space="preserve">
+    <value>LyricInfo_Translation</value>
+  </data>
+    <data name="LyricInfo_Timeline" xml:space="preserve">
+    <value>LyricInfo_Timeline</value>
+  </data>
+    <data name="LyricInfo_Transliteration" xml:space="preserve">
+    <value>LyricInfo_Transliteration</value>
+  </data>
+    <data name="LyricInfo_Proofread" xml:space="preserve">
+    <value>LyricInfo_Proofread</value>
+  </data>
+    <data name="LyricInfo_Offset" xml:space="preserve">
+    <value>LyricInfo_Offset</value>
+  </data>
+    <data name="LyricInfo_Duration" xml:space="preserve">
+    <value>LyricInfo_Duration</value>
+  </data>
+    <data name="Title_LyricInfo" xml:space="preserve">
+        <value>Title_LyricInfo</value>
+    </data>
+    <data name="Title_SongInfo" xml:space="preserve">
+        <value>Title_SongInfo</value>
+    </data>
+    <data name="SongInfo_Param" xml:space="preserve">
+        <value >SongInfo_Param</value>
+    </data>
+    <data name="SongInfo_Value" xml:space="preserve">
+        <value>SongInfo_Value</value>
+    </data>
+    <data name="Nav_LinesEdit" xml:space="preserve">
+        <value>Nav_LinesEdit</value>
+    </data>
+    <data name="Btn_PlayController_Play" xml:space="preserve">
+        <value>Btn_PlayController</value>
+    </data>
+    <data name="Btn_PlayController_Open" xml:space="preserve">
+        <value>Btn_PlayController_Open</value>
+    </data>
+    <data name="Btn_SongLines_Add" xml:space="preserve">
+        <value>Btn_SongLines_Add</value>
+    </data>
+    <data name="Btn_SongLines_Remove" xml:space="preserve">
+        <value>Btn_SongLines_Remove</value>
+    </data>
+    <data name="LineEditing_Line_Start" xml:space="preserve">
+        <value>LineEditing_Line_Start</value>
+    </data>
+    <data name="LineEditing_Line_End" xml:space="preserve">
+        <value>LineEditing_Line_End</value>
+    </data>
+    <data name="LineEditing_Line_Style" xml:space="preserve">
+        <value>LineEditing_Line_Style</value>
+    </data>
+    <data name="LineEditing_Line_Comment" xml:space="preserve">
+        <value>LineEditing_Line_Comment</value>
+    </data>
+    <data name="LineEditing_Line_Text" xml:space="preserve">
+        <value>LineEditing_Line_Text</value>
+    </data>
+    <data name="LineEditing_Line_Translation" xml:space="preserve">
+        <value>LineEditing_Line_Translation</value>
+    </data>
+    <data name="LineEditing_Line_Transliteration" xml:space="preserve">
+        <value>LineEditing_Line_Transliteration</value>
+    </data>
+    <data name="LineEditing_Line_Type" xml:space="preserve">
+        <value>LineEditing_Line_Type</value>
+    </data>
+    <data name="LineEditing_Line_Type_PureText" xml:space="preserve">
+        <value>LineEditing_Line_Type_PureText</value>
+    </data>
+    <data name="LineEditing_Line_Type_Words" xml:space="preserve">
+        <value>LineEditing_Line_Type_Words</value>
+    </data>
+    <data name="LineEditing_Timeline_HintLabel" xml:space="preserve">
+        <value>LineEditing_Timeline_HintLabel</value>
+    </data>
+    <data name="LineEditing_StartTime" xml:space="preserve">
+        <value>LineEditing_StartTime</value>
+    </data>
+    <data name="LineEditing_EndTime" xml:space="preserve">
+        <value>LineEditing_EndTime</value>
+    </data>
+    <data name="Btn_SongLines_QuickAdd" xml:space="preserve">
+        <value>Btn_SongLines_QuickAdd</value>
+    </data>
+    <data name="LineEditing_Line_Type_Empty" xml:space="preserve">
+        <value>LineEditing_Line_Type_Empty</value>
+    </data>
+    <data name="Toggle_SongLines_PreviewMode" xml:space="preserve">
+        <value>Toggle_SongLines_PreviewMode</value>
+    </data>
+    <data name="Btn_SongLines_PlayStatus" xml:space="preserve">
+        <value>Btn_SongLines_PlayStatus</value>
+    </data>
+    <data name="Btn_SongLines_PreviousLine" xml:space="preserve">
+        <value>Btn_SongLines_PreviousLine</value>
+    </data>
+    <data name="Btn_SongLines_NextLine" xml:space="preserve">
+        <value>Btn_SongLines_NextLine</value>
+    </data>
+    <data name="Btn_SongLines_Start" xml:space="preserve">
+        <value>Btn_SongLines_Start</value>
+    </data>
+    <data name="Btn_SongLines_End" xml:space="preserve">
+        <value>Btn_SongLines_End</value>
+    </data>
+    <data name="Btn_SongLines_SeekBackward" xml:space="preserve">
+        <value>Btn_SongLines_SeekBackward</value>
+    </data>
+    <data name="Btn_SongLines_SeekForward" xml:space="preserve">
+        <value>Btn_SongLines_SeekForward</value>
+    </data>
+    <data name="Nav_StylesEditing" xml:space="preserve">
+        <value>Nav_StylesEditing</value>
+    </data>
+    <data name="Btn_StylesEdit_Add" xml:space="preserve">
+        <value>Btn_StylesEdit_Add</value>
+    </data>
+    <data name="Btn_StylesEdit_Remove" xml:space="preserve">
+        <value>Btn_StylesEdit_Remove</value>
+    </data>
+    <data name="StyleEdit_Style_Id" xml:space="preserve">
+        <value>StyleEdit_Style_Id</value>
+    </data>
+    <data name="LinesEdit_Line_Translation_Language" xml:space="preserve">
+        <value>LinesEdit_Line_Translation_Language</value>
+    </data>
+    <data name="LinesEdit_Line_Translation_Content" xml:space="preserve">
+        <value>LinesEdit_Line_Translation_Content</value>
+    </data>
+    <data name="StyleEdit_Style_Position" xml:space="preserve">
+        <value>StyleEdit_Style_Position</value>
+    </data>
+    <data name="StyleEdit_Style_Color" xml:space="preserve">
+        <value>StyleEdit_Style_Color</value>
+    </data>
+    <data name="StyleEdit_Style_Type" xml:space="preserve">
+        <value>StyleEdit_Style_Type</value>
+    </data>
+    <data name="StyleEdit_Style_Hidden" xml:space="preserve">
+        <value>StyleEdit_Style_Hidden</value>
+    </data>
+    <data name="StyleEdit_Style_Position_Undefined" xml:space="preserve">
+        <value>StyleEdit_Style_Position_Undefined</value>
+    </data>
+    <data name="StyleEdit_Style_Position_Left" xml:space="preserve">
+        <value>StyleEdit_Style_Position_Left</value>
+    </data>
+    <data name="StyleEdit_Style_Position_Center" xml:space="preserve">
+        <value>StyleEdit_Style_Position_Center</value>
+    </data>
+    <data name="StyleEdit_Style_Position_Right" xml:space="preserve">
+        <value>StyleEdit_Style_Position_Right</value>
+    </data>
+    <data name="StyleEdit_Style_Type_Normal" xml:space="preserve">
+        <value>StyleEdit_Style_Type_Normal</value>
+    </data>
+    <data name="StyleEdit_Style_Type_Background" xml:space="preserve">
+        <value>StyleEdit_Style_Type_Background</value>
+    </data>
+    <data name="StyleEdit_Style_Type_Whisper" xml:space="preserve">
+        <value>StyleEdit_Style_Type_Whisper</value>
+    </data>
+    <data name="StyleEdit_Style_Type_Stressed" xml:space="preserve">
+        <value>StyleEdit_Style_Type_Stressed</value>
+    </data>
+    <data name="LineEditing_Line_LineId" xml:space="preserve">
+        <value>LineEditing_Line_LineId</value>
+    </data>
+    <data name="LineEditing_Line_ParentLineId" xml:space="preserve">
+        <value>LineEditing_Line_ParentLineId</value>
+    </data>
+    <data name="Constant_1" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="StyleEdit_Style_Preview" xml:space="preserve">
+        <value>StyleEdit_Style_Preview</value>
+    </data>
+    <data name="Nav_WordEdit" xml:space="preserve">
+        <value>Nav_WordEdit</value>
+    </data>
+    <data name="WordEdit_LyricLines_Hint" xml:space="preserve">
+        <value>WordEdit_LyricLines_Hint</value>
+    </data>
+    <data name="WordEdit_LyricLine_Hint_PureText" xml:space="preserve">
+        <value>WordEdit_LyricLine_Hint_PureText</value>
+    </data>
+    <data name="WordEdit_LyricLine_Hint_Empty" xml:space="preserve">
+        <value>WordEdit_LyricLine_Hint_Empty</value>
+    </data>
+    <data name="Constant_0" xml:space="preserve">
+        <value>0</value>
+    </data>
+    <data name="Constant_2" xml:space="preserve">
+        <value>2</value>
+    </data>
+    <data name="Btn_WordEdit_ParseAll" xml:space="preserve">
+        <value>Btn_WordEdit_ParseAll</value>
+    </data>
+    <data name="Btn_WordEdit_Line_Align" xml:space="preserve">
+        <value>Btn_WordEdit_Line_Align</value>
+    </data>
+    <data name="Nav_Convert" xml:space="preserve">
+        <value>Nav_Convert</value>
+    </data>
+    <data name="Nav_Preview" xml:space="preserve">
+        <value>Nav_Preview</value>
+    </data>
+    <data name="Nav_Save" xml:space="preserve">
+        <value>Nav_Save</value>
+    </data>
+</root>

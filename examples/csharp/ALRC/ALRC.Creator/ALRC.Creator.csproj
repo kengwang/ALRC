@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <NoWarn>1701;1702;IL2121;NU1701;</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <NoWarn>1701;1702;IL2121;NU1701;</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+      <PackageReference Include="WPF-UI" Version="2.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Localization\Languages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Languages.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Properties\Settings.Designer.cs">
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.settings</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Localization\Languages.en-us.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <DependentUpon>Languages.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Localization\Languages.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Localization\Languages.zh-hans-cn.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <DependentUpon>Languages.resx</DependentUpon>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Views\Pages\HomePage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Controls\PlayController.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ALRC.Abstraction\ALRC.Abstraction.csproj" />
+      <ProjectReference Include="..\ALRC.Converters\ALRC.Converters.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Properties\Settings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+</Project>
