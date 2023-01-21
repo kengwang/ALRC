@@ -241,8 +241,8 @@
                             RowDetailsVisibilityMode="Collapsed"
                             SelectionMode="Single" >
                             <ui:DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Binding="{Binding LanguageTag, Mode=TwoWay}" Header="{x:Static t:Languages.LinesEdit_Line_Translation_Language}" />
-                                <DataGridTextColumn Width="320" Binding="{Binding  TranslationText, Mode=TwoWay}" Header="{x:Static t:Languages.LinesEdit_Line_Translation_Content}" />
+                                <DataGridTextColumn Width="50" Binding="{Binding LanguageTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static t:Languages.LinesEdit_Line_Translation_Language}" />
+                                <DataGridTextColumn Width="320" Binding="{Binding  TranslationText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static t:Languages.LinesEdit_Line_Translation_Content}" />
                             </ui:DataGrid.Columns>
                         </ui:DataGrid>
                     </Grid>

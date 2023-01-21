@@ -10,8 +10,4 @@
       <ProjectReference Include="..\ALRC.Abstraction\ALRC.Abstraction.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="EditingALRC" />
-    </ItemGroup>
-
 </Project>

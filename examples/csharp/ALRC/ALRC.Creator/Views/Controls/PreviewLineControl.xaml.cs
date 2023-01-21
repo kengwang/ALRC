@@ -38,6 +38,7 @@ public partial class PreviewLineControl : UserControl
     {
         base.OnInitialized(e);
         ViewModel.LineStyle = ViewModel.Alrc?.Styles.FirstOrDefault(t => t.Id == ViewModel.Line.LineStyle) ?? new();
+        WordsContainer.HorizontalAlignment = (HorizontalAlignment)_alignmentConverter.Convert(ViewModel.LineStyle.Position,null!,null!,null!);
         if (ViewModel.Line.Words is null or { Count: <= 0 }) return;
         LineTextBlock.Visibility = Visibility.Collapsed;
         foreach (var word in ViewModel.Line.Words)

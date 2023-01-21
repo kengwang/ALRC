@@ -138,7 +138,7 @@ public class EditingALRCLine : IModel
 
     public ObservableCollection<EditingALRCTranslation> Translations
     {
-        get => _translations = new ();
+        get => _translations;
         set => SetField(ref _translations, value);
     }
 

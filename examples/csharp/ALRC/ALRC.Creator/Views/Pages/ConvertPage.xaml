@@ -22,38 +22,51 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Button Click="ConvertToALRC_Click" MouseRightButtonUp="ConvertFromALRC_Click" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+        <Border CornerRadius="8" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Question" />
-                <TextBlock Grid.Row="1" FontSize="35" Text="ALRC" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="35" Text="ALRC" />
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Click="ConvertToALRC_Click">Convert to ALRC</Button>
+                </StackPanel>
             </Grid>
-        </Button>
+        </Border>
         
-        <Button Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+        <Border Grid.Row="0" CornerRadius="8" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="FileText" />
-                <TextBlock Grid.Row="1" FontSize="35" Text="LRC" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="35" Text="LRC" />
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Click="ConvertToLrc_Click">Convert to LRC</Button>
+                    <Button Click="ConvertTranslationToLrc_Click">Convert Translation to LRC</Button>
+                </StackPanel>
             </Grid>
-        </Button>
+        </Border>
         
-        <Button Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+        <Border CornerRadius="8" Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Qq" />
-                <TextBlock Grid.Row="1" FontSize="35" Text="QQ Music" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="35" Text="QQ Music" />
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Click="QQLyric_Convert_Click">Convert to QRC</Button>
+                </StackPanel>
             </Grid>
-        </Button>
+        </Border>
         
         <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
             <Grid>
@@ -62,19 +75,9 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Music" />
-                <TextBlock Grid.Row="1" FontSize="35" Text="Netease Music" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="35" Text="Netease Music" />
             </Grid>
         </Button>
         
-        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="Apple" />
-                <TextBlock Grid.Row="1" FontSize="35" Text="Apple Syllable" />
-            </Grid>
-        </Button>
     </Grid>
 </Page>
