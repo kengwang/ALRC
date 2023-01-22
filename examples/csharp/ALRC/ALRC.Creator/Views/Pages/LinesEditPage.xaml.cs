@@ -143,15 +143,38 @@ public partial class LinesEditPage : Page
         if (QuickInputBox.Visibility == Visibility.Visible && !string.IsNullOrWhiteSpace(_viewModel.QuickInputTexts))
         {
             _viewModel.EditingAlrc.Lines.Clear();
+            string? lang = null;
+            if (_viewModel.QuickInputTexts.StartsWith("[lang:"))
+            {
+
+                lang = _viewModel.QuickInputTexts.Substring(6, _viewModel.QuickInputTexts.IndexOf(']') - 6);
+            }
+
             var convLines = _viewModel.QuickInputTexts.Replace("\r\n", "\n").Replace("\r", "\n");
             var lines = convLines.Split('\n');
             foreach (var line in lines)
             {
-                _viewModel.EditingAlrc.Lines.Add(new EditingALRCLine
+                var alrcLine = new EditingALRCLine
                 {
-                    Type = string.IsNullOrWhiteSpace(line) ? 2 : 0,
-                    Text = line
-                });
+                    Type = string.IsNullOrWhiteSpace(line) ? 2 : 0
+                };
+                if (!string.IsNullOrWhiteSpace(lang) && line.Contains("[["))
+                {
+                    alrcLine.Text = line.Substring(0, line.IndexOf("[[", StringComparison.Ordinal));
+                    var translation = line.Substring(line.IndexOf("[[", StringComparison.Ordinal) + 2,
+                        line.IndexOf("]]", StringComparison.Ordinal) - line.IndexOf("[[", StringComparison.Ordinal) -2);
+                    alrcLine.Translations.Add(new EditingALRCTranslation
+                    {
+                        LanguageTag = lang,
+                        TranslationText = translation
+                    });
+                }
+                else
+                {
+                    alrcLine.Text = line;
+                }
+               
+                _viewModel.EditingAlrc.Lines.Add(alrcLine);
             }
         }
 
