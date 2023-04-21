@@ -78,7 +78,7 @@
         <value>End Time</value>
     </data>
     <data name="LineEditing_Line_Style" xml:space="preserve">
-        <value>Line Style</value>
+        <value>Style</value>
     </data>
     <data name="LineEditing_Line_Comment" xml:space="preserve">
         <value>Comment</value>

@@ -285,7 +285,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 行样式.
+        ///   Looks up a localized string similar to 样式.
         /// </summary>
         public static string LineEditing_Line_Style {
             get {

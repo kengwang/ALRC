@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -193,16 +194,16 @@ public partial class WordEditPage : Page
         foreach (var line in LineSelector.SelectedItems.Cast<EditingALRCLine>())
         {
             if (string.IsNullOrEmpty(line?.Text)) continue;
-            var first = true;
-            foreach (var word in line.Text?.Replace(" ", " \n").Replace("\r\n", "\n").Replace("\r", "\n")
-                                     .Split("\n") ??
-                                 Array.Empty<string>())
+            var first = false;
+            var words = Regex.Replace(line.Text.Replace("\r\n","\n").Replace("\r","\n").Replace(" ","\n"), "([\\u4e00-\\u9fa5\\u3040-\\u30ff\\uac00-\\ud7a30-9])", "$1\n").Split('\n');
+            foreach (var word in words)
             {
                 var lrcWord = new EditingALRCWord
                 {
                     Word = word
                 };
                 line.Words ??= new();
+
                 if (first)
                 {
                     line.Words.Clear();

@@ -189,7 +189,7 @@
         <value>终止时间</value>
     </data>
     <data name="LineEditing_Line_Style" xml:space="preserve">
-        <value>行样式</value>
+        <value>样式</value>
     </data>
     <data name="LineEditing_Line_Comment" xml:space="preserve">
         <value>评论</value>
