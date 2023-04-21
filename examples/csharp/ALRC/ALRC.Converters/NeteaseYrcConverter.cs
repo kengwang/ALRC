@@ -28,7 +28,7 @@ public class NeteaseYrcConverter : ILyricConverter<string>
             foreach (var alrcLine in input.Lines)
             {
                 bool isBackground = false;
-                if (alrcLine.Start is null or < 0)
+                if (alrcLine.Start is null || alrcLine is { Start: 0, End: 0 })
                 {
                     if (alrcLine.Words is { Count: > 0 })
                         builder.Append($"[{alrcLine.Words[0].Start},{alrcLine.Words[^1].End - alrcLine.Words[0].Start}]");
