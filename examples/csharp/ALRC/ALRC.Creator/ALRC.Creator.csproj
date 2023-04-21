@@ -44,10 +44,6 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Languages.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Localization\Languages.zh-hans-cn.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <DependentUpon>Languages.resx</DependentUpon>
-      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>

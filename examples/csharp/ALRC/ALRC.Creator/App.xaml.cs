@@ -23,14 +23,6 @@ namespace ALRC.Creator
         {
             DispatcherExtension.UiThreadId = Dispatcher.Thread.ManagedThreadId;
             DispatcherExtension.Dispatcher = Dispatcher;
-
-            if (CultureInfo.CurrentUICulture.IetfLanguageTag == "zh-CN")
-            {
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-hans-cn");
-                Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
-                Languages.Culture = Thread.CurrentThread.CurrentCulture;
-            }
-
             base.OnStartup(e);
             ConfigureServices();
             this.AddConverters();

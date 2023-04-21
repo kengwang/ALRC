@@ -186,7 +186,7 @@ public partial class LinesEditPage : Page
 
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (LineSelector.SelectedItems.Count <= 1 || _viewModel.IsPreviewMode) return;
+        if (!LineSelector.SelectedItems.Contains(_viewModel.FocusingLine) || LineSelector.SelectedItems.Count <= 0 || _viewModel.IsPreviewMode) return;
         foreach (var editingAlrcLine in LineSelector.SelectedItems.Cast<EditingALRCLine>().ToList())
         {
             editingAlrcLine.Type = TypeSelector.SelectedIndex;

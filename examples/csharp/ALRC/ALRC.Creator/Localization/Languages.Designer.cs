@@ -60,7 +60,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_PlayController_Open.
+        ///   Looks up a localized string similar to 打开.
         /// </summary>
         public static string Btn_PlayController_Open {
             get {
@@ -69,7 +69,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_PlayController.
+        ///   Looks up a localized string similar to 播放 / 暂停.
         /// </summary>
         public static string Btn_PlayController_Play {
             get {
@@ -78,7 +78,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_Add.
+        ///   Looks up a localized string similar to 添加一行.
         /// </summary>
         public static string Btn_SongLines_Add {
             get {
@@ -87,7 +87,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_End.
+        ///   Looks up a localized string similar to 设置终点  (Num6 / D).
         /// </summary>
         public static string Btn_SongLines_End {
             get {
@@ -96,7 +96,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_NextLine.
+        ///   Looks up a localized string similar to 下一行  (Num2 / LCtrl).
         /// </summary>
         public static string Btn_SongLines_NextLine {
             get {
@@ -105,7 +105,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_PlayStatus.
+        ///   Looks up a localized string similar to 播放 / 暂停  (Num5 / S).
         /// </summary>
         public static string Btn_SongLines_PlayStatus {
             get {
@@ -114,7 +114,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_PreviousLine.
+        ///   Looks up a localized string similar to 上一行  (Num8 / LShift).
         /// </summary>
         public static string Btn_SongLines_PreviousLine {
             get {
@@ -123,7 +123,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_QuickAdd.
+        ///   Looks up a localized string similar to 快速添加.
         /// </summary>
         public static string Btn_SongLines_QuickAdd {
             get {
@@ -132,7 +132,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_Remove.
+        ///   Looks up a localized string similar to 删除此行.
         /// </summary>
         public static string Btn_SongLines_Remove {
             get {
@@ -141,7 +141,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_SeekBackward.
+        ///   Looks up a localized string similar to 后退 5 秒  (Num1 / Q).
         /// </summary>
         public static string Btn_SongLines_SeekBackward {
             get {
@@ -150,7 +150,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_SeekForward.
+        ///   Looks up a localized string similar to 前进 5 秒  (Num3 / E).
         /// </summary>
         public static string Btn_SongLines_SeekForward {
             get {
@@ -159,7 +159,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_SongLines_Start.
+        ///   Looks up a localized string similar to 设置起点  (Num4 / A).
         /// </summary>
         public static string Btn_SongLines_Start {
             get {
@@ -168,7 +168,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_StylesEdit_Add.
+        ///   Looks up a localized string similar to 添加样式.
         /// </summary>
         public static string Btn_StylesEdit_Add {
             get {
@@ -177,7 +177,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_StylesEdit_Remove.
+        ///   Looks up a localized string similar to 删除样式.
         /// </summary>
         public static string Btn_StylesEdit_Remove {
             get {
@@ -186,7 +186,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_WordEdit_Line_Align.
+        ///   Looks up a localized string similar to 行对齐.
         /// </summary>
         public static string Btn_WordEdit_Line_Align {
             get {
@@ -195,7 +195,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Btn_WordEdit_ParseAll.
+        ///   Looks up a localized string similar to 自动解析全部.
         /// </summary>
         public static string Btn_WordEdit_ParseAll {
             get {
@@ -231,7 +231,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_EndTime.
+        ///   Looks up a localized string similar to 结束时间.
         /// </summary>
         public static string LineEditing_EndTime {
             get {
@@ -240,7 +240,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Comment.
+        ///   Looks up a localized string similar to 评论.
         /// </summary>
         public static string LineEditing_Line_Comment {
             get {
@@ -249,7 +249,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_End.
+        ///   Looks up a localized string similar to 终止时间.
         /// </summary>
         public static string LineEditing_Line_End {
             get {
@@ -258,7 +258,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_LineId.
+        ///   Looks up a localized string similar to 行 ID.
         /// </summary>
         public static string LineEditing_Line_LineId {
             get {
@@ -267,7 +267,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_ParentLineId.
+        ///   Looks up a localized string similar to 父行 ID.
         /// </summary>
         public static string LineEditing_Line_ParentLineId {
             get {
@@ -276,7 +276,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Start.
+        ///   Looks up a localized string similar to 起始时间.
         /// </summary>
         public static string LineEditing_Line_Start {
             get {
@@ -285,7 +285,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Style.
+        ///   Looks up a localized string similar to 行样式.
         /// </summary>
         public static string LineEditing_Line_Style {
             get {
@@ -294,7 +294,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Text.
+        ///   Looks up a localized string similar to 文本内容.
         /// </summary>
         public static string LineEditing_Line_Text {
             get {
@@ -303,7 +303,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Translation.
+        ///   Looks up a localized string similar to 翻译.
         /// </summary>
         public static string LineEditing_Line_Translation {
             get {
@@ -312,7 +312,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Transliteration.
+        ///   Looks up a localized string similar to 音译.
         /// </summary>
         public static string LineEditing_Line_Transliteration {
             get {
@@ -321,7 +321,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Type.
+        ///   Looks up a localized string similar to 类型.
         /// </summary>
         public static string LineEditing_Line_Type {
             get {
@@ -330,7 +330,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Type_Empty.
+        ///   Looks up a localized string similar to 伴奏.
         /// </summary>
         public static string LineEditing_Line_Type_Empty {
             get {
@@ -339,7 +339,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Type_PureText.
+        ///   Looks up a localized string similar to 纯文本.
         /// </summary>
         public static string LineEditing_Line_Type_PureText {
             get {
@@ -348,7 +348,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Line_Type_Words.
+        ///   Looks up a localized string similar to 逐字.
         /// </summary>
         public static string LineEditing_Line_Type_Words {
             get {
@@ -357,7 +357,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_StartTime.
+        ///   Looks up a localized string similar to 开始时间.
         /// </summary>
         public static string LineEditing_StartTime {
             get {
@@ -366,7 +366,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LineEditing_Timeline_HintLabel.
+        ///   Looks up a localized string similar to 聚焦到下方文本框即可进行打轴.
         /// </summary>
         public static string LineEditing_Timeline_HintLabel {
             get {
@@ -375,7 +375,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LinesEdit_Line_Translation_Content.
+        ///   Looks up a localized string similar to 内容.
         /// </summary>
         public static string LinesEdit_Line_Translation_Content {
             get {
@@ -384,7 +384,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LinesEdit_Line_Translation_Language.
+        ///   Looks up a localized string similar to 语言.
         /// </summary>
         public static string LinesEdit_Line_Translation_Language {
             get {
@@ -393,7 +393,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Author.
+        ///   Looks up a localized string similar to 作者.
         /// </summary>
         public static string LyricInfo_Author {
             get {
@@ -402,7 +402,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Duration.
+        ///   Looks up a localized string similar to 时长.
         /// </summary>
         public static string LyricInfo_Duration {
             get {
@@ -411,7 +411,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Language.
+        ///   Looks up a localized string similar to 语言 (RFC 1766).
         /// </summary>
         public static string LyricInfo_Language {
             get {
@@ -420,7 +420,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Offset.
+        ///   Looks up a localized string similar to 偏移 (对歌曲快几毫秒).
         /// </summary>
         public static string LyricInfo_Offset {
             get {
@@ -429,7 +429,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Proofread.
+        ///   Looks up a localized string similar to 校对.
         /// </summary>
         public static string LyricInfo_Proofread {
             get {
@@ -438,7 +438,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Timeline.
+        ///   Looks up a localized string similar to 时轴.
         /// </summary>
         public static string LyricInfo_Timeline {
             get {
@@ -447,7 +447,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Translation.
+        ///   Looks up a localized string similar to 翻译.
         /// </summary>
         public static string LyricInfo_Translation {
             get {
@@ -456,7 +456,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LyricInfo_Transliteration.
+        ///   Looks up a localized string similar to 音译.
         /// </summary>
         public static string LyricInfo_Transliteration {
             get {
@@ -465,7 +465,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_Convert.
+        ///   Looks up a localized string similar to 转换.
         /// </summary>
         public static string Nav_Convert {
             get {
@@ -474,7 +474,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_Home.
+        ///   Looks up a localized string similar to 主页.
         /// </summary>
         public static string Nav_Home {
             get {
@@ -483,7 +483,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_LyricInfo.
+        ///   Looks up a localized string similar to 信息.
         /// </summary>
         public static string Nav_Info {
             get {
@@ -492,7 +492,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_LinesEdit.
+        ///   Looks up a localized string similar to 行编辑.
         /// </summary>
         public static string Nav_LinesEdit {
             get {
@@ -501,7 +501,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_Preview.
+        ///   Looks up a localized string similar to 预览.
         /// </summary>
         public static string Nav_Preview {
             get {
@@ -510,7 +510,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_Save.
+        ///   Looks up a localized string similar to 工程.
         /// </summary>
         public static string Nav_Save {
             get {
@@ -519,7 +519,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_Settings.
+        ///   Looks up a localized string similar to 设置.
         /// </summary>
         public static string Nav_Settings {
             get {
@@ -528,7 +528,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_StylesEditing.
+        ///   Looks up a localized string similar to 样式编辑.
         /// </summary>
         public static string Nav_StylesEditing {
             get {
@@ -537,7 +537,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nav_WordEdit.
+        ///   Looks up a localized string similar to 逐字编辑.
         /// </summary>
         public static string Nav_WordEdit {
             get {
@@ -546,7 +546,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SongInfo_Param.
+        ///   Looks up a localized string similar to 字段.
         /// </summary>
         public static string SongInfo_Param {
             get {
@@ -555,7 +555,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SongInfo_Value.
+        ///   Looks up a localized string similar to 内容.
         /// </summary>
         public static string SongInfo_Value {
             get {
@@ -564,7 +564,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Color.
+        ///   Looks up a localized string similar to 颜色代码 (不带 #).
         /// </summary>
         public static string StyleEdit_Style_Color {
             get {
@@ -573,7 +573,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Hidden.
+        ///   Looks up a localized string similar to 非聚焦时隐藏.
         /// </summary>
         public static string StyleEdit_Style_Hidden {
             get {
@@ -582,7 +582,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Id.
+        ///   Looks up a localized string similar to 样式 ID.
         /// </summary>
         public static string StyleEdit_Style_Id {
             get {
@@ -591,7 +591,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Position.
+        ///   Looks up a localized string similar to 位置.
         /// </summary>
         public static string StyleEdit_Style_Position {
             get {
@@ -600,7 +600,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Position_Center.
+        ///   Looks up a localized string similar to 居中.
         /// </summary>
         public static string StyleEdit_Style_Position_Center {
             get {
@@ -609,7 +609,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Position_Left.
+        ///   Looks up a localized string similar to 居左.
         /// </summary>
         public static string StyleEdit_Style_Position_Left {
             get {
@@ -618,7 +618,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Position_Right.
+        ///   Looks up a localized string similar to 居右.
         /// </summary>
         public static string StyleEdit_Style_Position_Right {
             get {
@@ -627,7 +627,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Position_Undefined.
+        ///   Looks up a localized string similar to 未定.
         /// </summary>
         public static string StyleEdit_Style_Position_Undefined {
             get {
@@ -636,7 +636,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Preview.
+        ///   Looks up a localized string similar to 预览:.
         /// </summary>
         public static string StyleEdit_Style_Preview {
             get {
@@ -645,7 +645,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Type.
+        ///   Looks up a localized string similar to 类型.
         /// </summary>
         public static string StyleEdit_Style_Type {
             get {
@@ -654,7 +654,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Type_Background.
+        ///   Looks up a localized string similar to 背景音.
         /// </summary>
         public static string StyleEdit_Style_Type_Background {
             get {
@@ -663,7 +663,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Type_Normal.
+        ///   Looks up a localized string similar to 正常.
         /// </summary>
         public static string StyleEdit_Style_Type_Normal {
             get {
@@ -672,7 +672,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Type_Stressed.
+        ///   Looks up a localized string similar to 加重.
         /// </summary>
         public static string StyleEdit_Style_Type_Stressed {
             get {
@@ -681,7 +681,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StyleEdit_Style_Type_Whisper.
+        ///   Looks up a localized string similar to 轻声.
         /// </summary>
         public static string StyleEdit_Style_Type_Whisper {
             get {
@@ -690,7 +690,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title_LyricInfo.
+        ///   Looks up a localized string similar to 歌词信息.
         /// </summary>
         public static string Title_LyricInfo {
             get {
@@ -699,7 +699,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title_SongInfo.
+        ///   Looks up a localized string similar to 歌曲信息 (Enter 新建行, Delete 删除行).
         /// </summary>
         public static string Title_SongInfo {
             get {
@@ -708,7 +708,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Toggle_SongLines_PreviewMode.
+        ///   Looks up a localized string similar to 预览模式.
         /// </summary>
         public static string Toggle_SongLines_PreviewMode {
             get {
@@ -717,7 +717,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WordEdit_LyricLine_Hint_Empty.
+        ///   Looks up a localized string similar to 此行为伴奏.
         /// </summary>
         public static string WordEdit_LyricLine_Hint_Empty {
             get {
@@ -726,7 +726,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WordEdit_LyricLine_Hint_PureText.
+        ///   Looks up a localized string similar to 此行为纯文本.
         /// </summary>
         public static string WordEdit_LyricLine_Hint_PureText {
             get {
@@ -735,7 +735,7 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WordEdit_LyricLines_Hint.
+        ///   Looks up a localized string similar to 选择下面的一行:.
         /// </summary>
         public static string WordEdit_LyricLines_Hint {
             get {

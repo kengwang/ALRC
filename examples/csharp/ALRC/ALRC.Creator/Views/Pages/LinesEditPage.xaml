@@ -125,7 +125,7 @@
                         <ComboBox
                             x:Name="TypeSelector"
                             Grid.Column="1"
-                            SelectedIndex="{Binding FocusingLine.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedIndex="{Binding FocusingLine.Type, Mode=OneWay}"
                             SelectionChanged="Selector_OnSelectionChanged">
                             <ComboBoxItem Content="{x:Static t:Languages.LineEditing_Line_Type_PureText}" />
                             <ComboBoxItem Content="{x:Static t:Languages.LineEditing_Line_Type_Words}" />

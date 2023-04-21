@@ -123,212 +123,211 @@
         </value>
     </resheader>
     <data name="Nav_Home" xml:space="preserve">
-    <value>Nav_Home</value>
-        <comment>侧边栏主页按钮</comment>
-  </data>
+        <value>主页</value>
+    </data>
     <data name="Nav_Info" xml:space="preserve">
-    <value>Nav_LyricInfo</value>
-  </data>
+        <value>信息</value>
+    </data>
     <data name="Nav_Settings" xml:space="preserve">
-    <value>Nav_Settings</value>
-  </data>
+        <value>设置</value>
+    </data>
     <data name="LyricInfo_Author" xml:space="preserve">
-    <value>LyricInfo_Author</value>
-  </data>
-    <data name="LyricInfo_Language" xml:space="preserve">
-    <value>LyricInfo_Language</value>
-  </data>
-    <data name="LyricInfo_Translation" xml:space="preserve">
-    <value>LyricInfo_Translation</value>
-  </data>
-    <data name="LyricInfo_Timeline" xml:space="preserve">
-    <value>LyricInfo_Timeline</value>
-  </data>
-    <data name="LyricInfo_Transliteration" xml:space="preserve">
-    <value>LyricInfo_Transliteration</value>
-  </data>
-    <data name="LyricInfo_Proofread" xml:space="preserve">
-    <value>LyricInfo_Proofread</value>
-  </data>
-    <data name="LyricInfo_Offset" xml:space="preserve">
-    <value>LyricInfo_Offset</value>
-  </data>
+        <value>作者</value>
+    </data>
     <data name="LyricInfo_Duration" xml:space="preserve">
-    <value>LyricInfo_Duration</value>
-  </data>
+        <value>时长</value>
+    </data>
+    <data name="LyricInfo_Language" xml:space="preserve">
+        <value>语言 (RFC 1766)</value>
+    </data>
+    <data name="LyricInfo_Offset" xml:space="preserve">
+        <value>偏移 (对歌曲快几毫秒)</value>
+    </data>
+    <data name="LyricInfo_Proofread" xml:space="preserve">
+        <value>校对</value>
+    </data>
+    <data name="LyricInfo_Timeline" xml:space="preserve">
+        <value>时轴</value>
+    </data>
+    <data name="LyricInfo_Translation" xml:space="preserve">
+        <value>翻译</value>
+    </data>
+    <data name="LyricInfo_Transliteration" xml:space="preserve">
+        <value>音译</value>
+    </data>
     <data name="Title_LyricInfo" xml:space="preserve">
-        <value>Title_LyricInfo</value>
+        <value>歌词信息</value>
     </data>
     <data name="Title_SongInfo" xml:space="preserve">
-        <value>Title_SongInfo</value>
+        <value>歌曲信息 (Enter 新建行, Delete 删除行)</value>
     </data>
     <data name="SongInfo_Param" xml:space="preserve">
-        <value >SongInfo_Param</value>
+        <value>字段</value>
     </data>
     <data name="SongInfo_Value" xml:space="preserve">
-        <value>SongInfo_Value</value>
+        <value>内容</value>
     </data>
     <data name="Nav_LinesEdit" xml:space="preserve">
-        <value>Nav_LinesEdit</value>
+        <value>行编辑</value>
     </data>
     <data name="Btn_PlayController_Play" xml:space="preserve">
-        <value>Btn_PlayController</value>
+        <value>播放 / 暂停</value>
     </data>
     <data name="Btn_PlayController_Open" xml:space="preserve">
-        <value>Btn_PlayController_Open</value>
+        <value>打开</value>
     </data>
     <data name="Btn_SongLines_Add" xml:space="preserve">
-        <value>Btn_SongLines_Add</value>
+        <value>添加一行</value>
     </data>
     <data name="Btn_SongLines_Remove" xml:space="preserve">
-        <value>Btn_SongLines_Remove</value>
+        <value>删除此行</value>
     </data>
     <data name="LineEditing_Line_Start" xml:space="preserve">
-        <value>LineEditing_Line_Start</value>
+        <value>起始时间</value>
     </data>
     <data name="LineEditing_Line_End" xml:space="preserve">
-        <value>LineEditing_Line_End</value>
+        <value>终止时间</value>
     </data>
     <data name="LineEditing_Line_Style" xml:space="preserve">
-        <value>LineEditing_Line_Style</value>
+        <value>行样式</value>
     </data>
     <data name="LineEditing_Line_Comment" xml:space="preserve">
-        <value>LineEditing_Line_Comment</value>
+        <value>评论</value>
     </data>
     <data name="LineEditing_Line_Text" xml:space="preserve">
-        <value>LineEditing_Line_Text</value>
+        <value>文本内容</value>
     </data>
     <data name="LineEditing_Line_Translation" xml:space="preserve">
-        <value>LineEditing_Line_Translation</value>
+        <value>翻译</value>
     </data>
     <data name="LineEditing_Line_Transliteration" xml:space="preserve">
-        <value>LineEditing_Line_Transliteration</value>
+        <value>音译</value>
     </data>
     <data name="LineEditing_Line_Type" xml:space="preserve">
-        <value>LineEditing_Line_Type</value>
+        <value>类型</value>
     </data>
     <data name="LineEditing_Line_Type_PureText" xml:space="preserve">
-        <value>LineEditing_Line_Type_PureText</value>
+        <value>纯文本</value>
     </data>
     <data name="LineEditing_Line_Type_Words" xml:space="preserve">
-        <value>LineEditing_Line_Type_Words</value>
+        <value>逐字</value>
     </data>
     <data name="LineEditing_Timeline_HintLabel" xml:space="preserve">
-        <value>LineEditing_Timeline_HintLabel</value>
+        <value>聚焦到下方文本框即可进行打轴</value>
     </data>
     <data name="LineEditing_StartTime" xml:space="preserve">
-        <value>LineEditing_StartTime</value>
+        <value>开始时间</value>
     </data>
     <data name="LineEditing_EndTime" xml:space="preserve">
-        <value>LineEditing_EndTime</value>
+        <value>结束时间</value>
     </data>
     <data name="Btn_SongLines_QuickAdd" xml:space="preserve">
-        <value>Btn_SongLines_QuickAdd</value>
+        <value>快速添加</value>
     </data>
     <data name="LineEditing_Line_Type_Empty" xml:space="preserve">
-        <value>LineEditing_Line_Type_Empty</value>
+        <value>伴奏</value>
     </data>
     <data name="Toggle_SongLines_PreviewMode" xml:space="preserve">
-        <value>Toggle_SongLines_PreviewMode</value>
+        <value>预览模式</value>
     </data>
     <data name="Btn_SongLines_PlayStatus" xml:space="preserve">
-        <value>Btn_SongLines_PlayStatus</value>
+        <value>播放 / 暂停  (Num5 / S)</value>
     </data>
     <data name="Btn_SongLines_PreviousLine" xml:space="preserve">
-        <value>Btn_SongLines_PreviousLine</value>
+        <value>上一行  (Num8 / LShift)</value>
     </data>
     <data name="Btn_SongLines_NextLine" xml:space="preserve">
-        <value>Btn_SongLines_NextLine</value>
-    </data>
-    <data name="Btn_SongLines_Start" xml:space="preserve">
-        <value>Btn_SongLines_Start</value>
+        <value>下一行  (Num2 / LCtrl)</value>
     </data>
     <data name="Btn_SongLines_End" xml:space="preserve">
-        <value>Btn_SongLines_End</value>
+        <value>设置终点  (Num6 / D)</value>
+    </data>
+    <data name="Btn_SongLines_Start" xml:space="preserve">
+        <value>设置起点  (Num4 / A)</value>
     </data>
     <data name="Btn_SongLines_SeekBackward" xml:space="preserve">
-        <value>Btn_SongLines_SeekBackward</value>
+        <value>后退 5 秒  (Num1 / Q)</value>
     </data>
     <data name="Btn_SongLines_SeekForward" xml:space="preserve">
-        <value>Btn_SongLines_SeekForward</value>
+        <value>前进 5 秒  (Num3 / E)</value>
     </data>
     <data name="Nav_StylesEditing" xml:space="preserve">
-        <value>Nav_StylesEditing</value>
+        <value>样式编辑</value>
     </data>
     <data name="Btn_StylesEdit_Add" xml:space="preserve">
-        <value>Btn_StylesEdit_Add</value>
+        <value>添加样式</value>
     </data>
     <data name="Btn_StylesEdit_Remove" xml:space="preserve">
-        <value>Btn_StylesEdit_Remove</value>
+        <value>删除样式</value>
     </data>
     <data name="StyleEdit_Style_Id" xml:space="preserve">
-        <value>StyleEdit_Style_Id</value>
+        <value>样式 ID</value>
     </data>
     <data name="LinesEdit_Line_Translation_Language" xml:space="preserve">
-        <value>LinesEdit_Line_Translation_Language</value>
+        <value>语言</value>
     </data>
     <data name="LinesEdit_Line_Translation_Content" xml:space="preserve">
-        <value>LinesEdit_Line_Translation_Content</value>
+        <value>内容</value>
     </data>
     <data name="StyleEdit_Style_Position" xml:space="preserve">
-        <value>StyleEdit_Style_Position</value>
+        <value>位置</value>
     </data>
     <data name="StyleEdit_Style_Color" xml:space="preserve">
-        <value>StyleEdit_Style_Color</value>
+        <value>颜色代码 (不带 #)</value>
     </data>
     <data name="StyleEdit_Style_Type" xml:space="preserve">
-        <value>StyleEdit_Style_Type</value>
+        <value>类型</value>
     </data>
     <data name="StyleEdit_Style_Hidden" xml:space="preserve">
-        <value>StyleEdit_Style_Hidden</value>
+        <value>非聚焦时隐藏</value>
     </data>
     <data name="StyleEdit_Style_Position_Undefined" xml:space="preserve">
-        <value>StyleEdit_Style_Position_Undefined</value>
+        <value>未定</value>
     </data>
     <data name="StyleEdit_Style_Position_Left" xml:space="preserve">
-        <value>StyleEdit_Style_Position_Left</value>
+        <value>居左</value>
     </data>
     <data name="StyleEdit_Style_Position_Center" xml:space="preserve">
-        <value>StyleEdit_Style_Position_Center</value>
+        <value>居中</value>
     </data>
     <data name="StyleEdit_Style_Position_Right" xml:space="preserve">
-        <value>StyleEdit_Style_Position_Right</value>
+        <value>居右</value>
     </data>
     <data name="StyleEdit_Style_Type_Normal" xml:space="preserve">
-        <value>StyleEdit_Style_Type_Normal</value>
+        <value>正常</value>
     </data>
     <data name="StyleEdit_Style_Type_Background" xml:space="preserve">
-        <value>StyleEdit_Style_Type_Background</value>
+        <value>背景音</value>
     </data>
     <data name="StyleEdit_Style_Type_Whisper" xml:space="preserve">
-        <value>StyleEdit_Style_Type_Whisper</value>
+        <value>轻声</value>
     </data>
     <data name="StyleEdit_Style_Type_Stressed" xml:space="preserve">
-        <value>StyleEdit_Style_Type_Stressed</value>
+        <value>加重</value>
     </data>
     <data name="LineEditing_Line_LineId" xml:space="preserve">
-        <value>LineEditing_Line_LineId</value>
+        <value>行 ID</value>
     </data>
     <data name="LineEditing_Line_ParentLineId" xml:space="preserve">
-        <value>LineEditing_Line_ParentLineId</value>
+        <value>父行 ID</value>
     </data>
     <data name="Constant_1" xml:space="preserve">
         <value>1</value>
     </data>
     <data name="StyleEdit_Style_Preview" xml:space="preserve">
-        <value>StyleEdit_Style_Preview</value>
+        <value>预览:</value>
     </data>
     <data name="Nav_WordEdit" xml:space="preserve">
-        <value>Nav_WordEdit</value>
+        <value>逐字编辑</value>
     </data>
     <data name="WordEdit_LyricLines_Hint" xml:space="preserve">
-        <value>WordEdit_LyricLines_Hint</value>
+        <value>选择下面的一行:</value>
     </data>
     <data name="WordEdit_LyricLine_Hint_PureText" xml:space="preserve">
-        <value>WordEdit_LyricLine_Hint_PureText</value>
+        <value>此行为纯文本</value>
     </data>
     <data name="WordEdit_LyricLine_Hint_Empty" xml:space="preserve">
-        <value>WordEdit_LyricLine_Hint_Empty</value>
+        <value>此行为伴奏</value>
     </data>
     <data name="Constant_0" xml:space="preserve">
         <value>0</value>
@@ -337,18 +336,18 @@
         <value>2</value>
     </data>
     <data name="Btn_WordEdit_ParseAll" xml:space="preserve">
-        <value>Btn_WordEdit_ParseAll</value>
+        <value>自动解析全部</value>
     </data>
     <data name="Btn_WordEdit_Line_Align" xml:space="preserve">
-        <value>Btn_WordEdit_Line_Align</value>
+        <value>行对齐</value>
     </data>
     <data name="Nav_Convert" xml:space="preserve">
-        <value>Nav_Convert</value>
+        <value>转换</value>
     </data>
     <data name="Nav_Preview" xml:space="preserve">
-        <value>Nav_Preview</value>
+        <value>预览</value>
     </data>
     <data name="Nav_Save" xml:space="preserve">
-        <value>Nav_Save</value>
+        <value>工程</value>
     </data>
 </root>

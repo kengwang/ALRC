@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Click="Save_Click">Save</Button>
+        <Button HorizontalAlignment="Stretch" Grid.Column="0" Click="Save_Click">Save</Button>
         <Button Grid.Column="1" Click="Import_Click">Import</Button>
     </Grid>
 </Page>

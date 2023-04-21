@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 using ALRC.Abstraction;
 
 namespace ALRC.Converters;
@@ -7,8 +8,18 @@ public class QQLyricConverter : ILyricConverter<string>
 {
     public ALRCFile Convert(string input)
     {
+        var lines = input.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n");
+        foreach (var lineText in lines)
+        {
+            if (string.IsNullOrWhiteSpace(lineText) || !lineText.StartsWith('[')) continue;
+            // 获取开始时间
+            
+        }
+
         throw new NotImplementedException();
     }
+
+
 
     public string ConvertBack(ALRCFile input)
     {
@@ -28,7 +39,16 @@ public class QQLyricConverter : ILyricConverter<string>
             foreach (var alrcLine in input.Lines)
             {
                 bool isBackground = false;
-                builder.Append($"[{alrcLine.Start},{alrcLine.End - alrcLine.Start}]");
+                if (alrcLine.Start is null or < 0)
+                {
+                    if (alrcLine.Words is { Count: > 0 })
+                        builder.Append($"[{alrcLine.Words[0].Start},{alrcLine.Words[^1].End - alrcLine.Words[0].Start}]");
+                }
+                else
+                {
+                    builder.Append($"[{alrcLine.Start},{alrcLine.End - alrcLine.Start}]");
+                }
+
                 if (input.Header?.Styles?.FirstOrDefault(t => t.Id == alrcLine.LineStyle) is
                     { Type: ALRCStyleAccent.Background or ALRCStyleAccent.Whisper }) isBackground = true;
                 if (isBackground) builder.Append('(');
