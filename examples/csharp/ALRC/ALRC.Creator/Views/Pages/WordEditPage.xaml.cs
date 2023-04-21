@@ -195,7 +195,7 @@ public partial class WordEditPage : Page
         {
             if (string.IsNullOrEmpty(line?.Text)) continue;
             var first = false;
-            var words = Regex.Replace(line.Text.Replace("\r\n","\n").Replace("\r","\n").Replace(" ","\n"), "([\\u4e00-\\u9fa5\\u3040-\\u30ff\\uac00-\\ud7a30-9])", "$1\n").Split('\n');
+            var words = Regex.Replace(line.Text.Replace("\r\n","\n").Replace("\r","\n").Replace(" "," \n"), "([\\u4e00-\\u9fa5\\u3040-\\u30ff\\uac00-\\ud7a30-9])", "$1\n").Split('\n');
             foreach (var word in words)
             {
                 var lrcWord = new EditingALRCWord
