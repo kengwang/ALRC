@@ -46,10 +46,16 @@
                 </Grid.RowDefinitions>
                 <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="FileText" />
                 <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="35" Text="LRC" />
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <Button Click="ConvertToLrc_Click">Convert to LRC</Button>
-                    <Button Click="ConvertTranslationToLrc_Click">Convert Translation to LRC</Button>
-                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Click="ConvertToLrc_Click">=> LRC</Button>
+                    <Button Grid.Column="1" Click="ConvertTranslationToLrc_Click">Translation => LRC</Button>
+                    <Button Grid.Column="2" Click="ImportFromLrc_Click">Import LRC</Button>
+                </Grid>
             </Grid>
         </Border>
         

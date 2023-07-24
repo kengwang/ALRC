@@ -100,4 +100,21 @@ public partial class ConvertPage : Page
             File.WriteAllText(dialog.FileName, lrcText);
         }
     }
+
+    private void ImportFromLrc_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new OpenFileDialog();
+        dialog.Filter = "LRC 文件|*.lrc";
+        if (dialog.ShowDialog() is true)
+        {
+            var lrc = File.ReadAllText(dialog.FileName);
+            var converter = new LrcConverter();
+            var alrcFile = converter.Convert(lrc);
+            var result = new EditableALRCConverter().ConvertBack(alrcFile);
+            _viewModel.Alrc.Lines = result.Lines;
+            _viewModel.Alrc.Styles = result.Styles;
+            _viewModel.Alrc.SongInfos = result.SongInfos;
+            _viewModel.Alrc.LyricInfo = result.LyricInfo;
+        }
+    }
 }

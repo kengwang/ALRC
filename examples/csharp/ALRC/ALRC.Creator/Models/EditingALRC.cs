@@ -9,7 +9,7 @@ namespace ALRC.Creator.Models;
 
 public class EditingALRC : IModel
 {
-    private EditingALRCLyricInfo _lyricInfo;
+    private EditingALRCLyricInfo _lyricInfo = new();
     private ObservableCollection<SongInfoItem> _songInfos = new();
     private ObservableCollection<EditingALRCLine> _lines = new();
     private ObservableCollection<EditingALRCStyle> _styles = new();
@@ -25,13 +25,7 @@ public class EditingALRC : IModel
         get => _lines;
         set => SetField(ref _lines, value);
     }
-
-    public EditingALRC(EditingALRCLyricInfo lyricInfo)
-    {
-        _lyricInfo = lyricInfo;
-    }
     
-
     public ObservableCollection<SongInfoItem> SongInfos
     {
         get => _songInfos;
