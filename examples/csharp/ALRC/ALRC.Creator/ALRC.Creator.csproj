@@ -7,7 +7,9 @@
         <UseWPF>true</UseWPF>
         <Platforms>AnyCPU;x64</Platforms>
         <LangVersion>default</LangVersion>
-        <Version>1.1.0-rc1</Version>
+        <Version>1.1.0</Version>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
