@@ -1,6 +1,7 @@
 ﻿using System.Buffers;
 using System.Text;
 using ALRC.Abstraction;
+using ALRC.Abstraction.Words;
 
 namespace ALRC.Converters;
 
@@ -28,7 +29,7 @@ public class LrcConverter : ILyricConverter<string>
             {
                 var startTimeString = TimeSpan.FromMilliseconds(inputLine.Start ?? 0)
                                               .ToString(@"mm\:ss\.ff");
-                builder.AppendLine($"[{startTimeString}] {inputLine.RawText}");
+                builder.AppendLine($"[{inputLine.Start}, {inputLine.End}] {inputLine.RawText ?? string.Join("",(inputLine.Words ?? new List<ALRCWord>()).Select(t=>t.Word))}");
             }
         }
 

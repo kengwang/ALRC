@@ -35,6 +35,10 @@ public class ALRCLine
     [JsonProperty("tx")]
     [JsonPropertyName("tx")]
     public string? RawText { get; set; }
+    
+    [JsonProperty("lt")]
+    [JsonPropertyName("lt")]
+    public string? Transliteration { get; set; }
 
     [JsonProperty("tr")]
     [JsonPropertyName("tr")]

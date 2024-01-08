@@ -56,10 +56,19 @@ public class EditingALRC : IModel
 
 public class EditingALRCWord
 {
+    private string? _displayWord;
     public long Start { get; set; }
     public long End { get; set; }
     public string? Word { get; set; }
     public string? WordStyle { get; set; }
+
+    public string? Transliteration { get; set; }
+    
+    public string? DisplayWord
+    {
+        get => _displayWord ?? Word;
+        set => _displayWord = value;
+    }
 }
 
 public class EditingALRCLine : IModel
@@ -74,6 +83,7 @@ public class EditingALRCLine : IModel
     private string? _id;
     private string? _parentLineId;
     private ObservableCollection<EditingALRCWord>? _words = new();
+    private string? _transliteration;
 
     public ObservableCollection<EditingALRCWord>? Words
     {
@@ -92,6 +102,12 @@ public class EditingALRCLine : IModel
     {
         get => _id;
         set => SetField(ref _id, value);
+    }
+
+    public string? Transliteration
+    {
+        get => _transliteration;
+        set => SetField(ref _transliteration, value);
     }
 
     public int Type

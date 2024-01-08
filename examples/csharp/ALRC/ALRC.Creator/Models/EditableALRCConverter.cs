@@ -111,6 +111,8 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                         lineTranslation.TranslationText;
                 }
 
+                lineToBeAdded.Transliteration = inputLine.Transliteration;
+                
                 if (inputLine.Type == 1)
                 {
                     //Words
@@ -126,10 +128,19 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                                                   WordStyle = string.IsNullOrWhiteSpace(word.WordStyle)
                                                       ? null
                                                       : word.WordStyle,
-                                                  Word = word.Word ?? string.Empty
+                                                  Word = word.Word ?? string.Empty,
+                                                  Transliteration = word.Transliteration
                                               };
                             lineToBeAdded.Words.Add(wordToBeAdd);
                         }
+                    }
+
+                    if (lineToBeAdded.Transliteration is not { Length: > 0 })
+                    {
+                        var computedTransliteration = string.Join(" ",
+                            inputLine.Words?.Select(t => t.Transliteration).ToList() ?? new());
+                        if (!string.IsNullOrWhiteSpace(computedTransliteration))
+                            inputLine.Transliteration = computedTransliteration;
                     }
                 }
 

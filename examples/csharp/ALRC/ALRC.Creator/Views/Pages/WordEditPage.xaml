@@ -72,7 +72,7 @@
                         SelectedItem="{Binding FocusingWord, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate DataType="{x:Type models:EditingALRCWord}">
-                                <TextBlock Margin="0,5,0,5" Text="{Binding Word}" />
+                                <TextBlock Margin="0,5,0,5" Text="{Binding DisplayWord}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -98,6 +98,7 @@
                         <Button
                             Grid.Column="1"
                             Click="Btn_AutoParseAll_Click"
+                            MouseRightButtonUp="Btn_AutoParseAll_RightClick"
                             Content="{x:Static t:Languages.Btn_WordEdit_ParseAll}" />
                         <Button
                             Grid.Column="2"
@@ -165,6 +166,22 @@
                             Text="{Binding FocusingWord.Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
+                    <Grid Margin="0,5" DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Margin="5,0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Content="{x:Static t:Languages.LineEditing_Line_Transliteration}" />
+                        <TextBox
+                            Grid.Column="1"
+                            Text="{Binding FocusingWord.Transliteration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                    
                     <Grid Margin="0,5" DockPanel.Dock="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100" />

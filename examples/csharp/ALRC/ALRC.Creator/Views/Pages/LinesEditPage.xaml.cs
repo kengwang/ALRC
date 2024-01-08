@@ -144,9 +144,8 @@ public partial class LinesEditPage : Page
         {
             _viewModel.EditingAlrc.Lines.Clear();
             string? lang = null;
-            if (_viewModel.QuickInputTexts.StartsWith("[lang:"))
+            if (_viewModel.QuickInputTexts.StartsWith("lang:"))
             {
-
                 lang = _viewModel.QuickInputTexts.Substring(6, _viewModel.QuickInputTexts.IndexOf(']') - 6);
             }
 
@@ -162,7 +161,8 @@ public partial class LinesEditPage : Page
                 {
                     alrcLine.Text = line.Substring(0, line.IndexOf("[[", StringComparison.Ordinal));
                     var translation = line.Substring(line.IndexOf("[[", StringComparison.Ordinal) + 2,
-                        line.IndexOf("]]", StringComparison.Ordinal) - line.IndexOf("[[", StringComparison.Ordinal) -2);
+                        line.IndexOf("]]", StringComparison.Ordinal) - line.IndexOf("[[", StringComparison.Ordinal) -
+                        2);
                     alrcLine.Translations.Add(new EditingALRCTranslation
                     {
                         LanguageTag = lang,
@@ -173,9 +173,13 @@ public partial class LinesEditPage : Page
                 {
                     alrcLine.Text = line;
                 }
-               
+
                 _viewModel.EditingAlrc.Lines.Add(alrcLine);
             }
+        }
+        else
+        {
+            _viewModel.QuickInputTexts = string.Join("\r\n", _viewModel.EditingAlrc.Lines.Select(t => t.Text));
         }
 
         QuickInputBox.Visibility =
@@ -186,7 +190,8 @@ public partial class LinesEditPage : Page
 
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!LineSelector.SelectedItems.Contains(_viewModel.FocusingLine) || LineSelector.SelectedItems.Count <= 0 || _viewModel.IsPreviewMode) return;
+        if (!LineSelector.SelectedItems.Contains(_viewModel.FocusingLine) || LineSelector.SelectedItems.Count <= 0 ||
+            _viewModel.IsPreviewMode) return;
         foreach (var editingAlrcLine in LineSelector.SelectedItems.Cast<EditingALRCLine>().ToList())
         {
             editingAlrcLine.Type = TypeSelector.SelectedIndex;
@@ -264,5 +269,39 @@ public partial class LinesEditPage : Page
     private void Btn_PlayStatus_Click(object sender, RoutedEventArgs e)
     {
         ChangePlayStatus();
+    }
+
+    private void Btn_AddLine_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        var newLine = new EditingALRCLine();
+        _viewModel.EditingAlrc.Lines.Insert(LineSelector.SelectedIndex, newLine);
+        _viewModel.FocusingLine = newLine;
+    }
+
+    private void Btn_AddTranslation_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(_viewModel.QuickInputTexts)) return;
+        var convLines = _viewModel.QuickInputTexts.Replace("\r\n", "\n").Replace("\r", "\n");
+        if (!convLines.StartsWith("tr:"))
+            return;
+        var lang = _viewModel.QuickInputTexts.Substring(3, convLines.IndexOf('\n') - 3);
+        var lines = convLines.Split('\n').ToList();
+        lines.RemoveAt(0);
+
+        for (var index = 0; index < _viewModel.EditingAlrc.Lines.Count; index++)
+        {
+            var alrcLine = _viewModel.EditingAlrc.Lines[index];
+            if (lines.Count <= index) break;
+            alrcLine.Translations.Add(new EditingALRCTranslation
+            {
+                LanguageTag = lang,
+                TranslationText = lines[index]
+            });
+        }
+
+        QuickInputBox.Visibility =
+            QuickInputBox.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+        LineSelector.Visibility =
+            LineSelector.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
     }
 }

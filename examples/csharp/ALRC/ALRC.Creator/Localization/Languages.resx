@@ -350,4 +350,7 @@
     <data name="Nav_Save" xml:space="preserve">
         <value>工程</value>
     </data>
+    <data name="Btn_SongLines_AddTranslation" xml:space="preserve">
+        <value>添加翻译</value>
+    </data>
 </root>

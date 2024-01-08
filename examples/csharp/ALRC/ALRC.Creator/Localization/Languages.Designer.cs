@@ -87,6 +87,15 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 添加翻译.
+        /// </summary>
+        public static string Btn_SongLines_AddTranslation {
+            get {
+                return ResourceManager.GetString("Btn_SongLines_AddTranslation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 设置终点  (Num6 / D).
         /// </summary>
         public static string Btn_SongLines_End {

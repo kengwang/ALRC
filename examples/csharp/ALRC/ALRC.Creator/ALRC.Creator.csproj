@@ -22,6 +22,8 @@
 
     <ItemGroup>
       <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+      <PackageReference Include="Kawazu" Version="1.1.4" />
+      <PackageReference Include="LibNMeCab.IpaDicBin" Version="0.10.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="WPF-UI" Version="2.0.3" />
     </ItemGroup>

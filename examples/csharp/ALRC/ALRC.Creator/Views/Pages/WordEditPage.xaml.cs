@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ALRC.Creator.Models;
 using ALRC.Creator.Models.ViewModels;
+using Kawazu;
 
 namespace ALRC.Creator.Views.Pages;
 
@@ -264,5 +265,37 @@ public partial class WordEditPage : Page
     private void PreviewMode_Unchecked(object sender, RoutedEventArgs e)
     {
         _viewModel.MusicPlayer.Timer.Tick -= TimerOnTick;
+    }
+
+    private async void Btn_AutoParseAll_RightClick(object sender, MouseButtonEventArgs e)
+    {
+        foreach (var line in LineSelector.SelectedItems.Cast<EditingALRCLine>())
+        {
+            if (string.IsNullOrWhiteSpace(line?.Text)) continue;
+            line.Words?.Clear();
+            var first = false;
+            // 日文分词
+            var kawazu = new KawazuConverter();
+            var divisions = await kawazu.GetDivisions(line.Text, To.Romaji, Mode.Spaced);
+            foreach (var division in divisions)
+            {
+                var lrcWord = new EditingALRCWord
+                {
+                    Word = division.Surface,
+                    Transliteration = division.RomaReading,
+                    DisplayWord = $"{division.Surface} ({division.RomaReading})"
+                };
+                line.Words ??= new();
+
+                if (first)
+                {
+                    line.Words.Clear();
+                    lrcWord.Start = line.Start;
+                    first = false;
+                }
+
+                line.Words.Add(lrcWord);
+            }
+        }
     }
 }

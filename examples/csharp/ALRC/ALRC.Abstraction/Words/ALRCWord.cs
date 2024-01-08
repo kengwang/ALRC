@@ -20,4 +20,8 @@ public class ALRCWord
     [JsonProperty("s")]
     [JsonPropertyName("s")]
     public string? WordStyle { get; set; }
+
+    [JsonProperty("l")]
+    [JsonPropertyName("l")]
+    public string? Transliteration { get; set; }
 }
