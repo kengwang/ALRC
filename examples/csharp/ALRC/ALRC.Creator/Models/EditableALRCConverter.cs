@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using ALRC.Abstraction;
 using ALRC.Converters;
 
@@ -28,7 +29,8 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                     Id = style.Id,
                     Position = (ALRCStylePosition)style.Position,
                     Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
-                    Type = (ALRCStyleAccent)style.Type
+                    Type = (ALRCStyleAccent)style.Type,
+                    HiddenOnBlur = style.Hidden
                 });
             }
         }
@@ -118,6 +120,8 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                     if (inputLine.Words is { Count: > 0 })
                     {
                         lineToBeAdded.Words ??= new List<ALRCWord>();
+                        var textSb = new StringBuilder();
+                        var transliterationSb = new StringBuilder();
                         foreach (var word in inputLine.Words)
                         {
                             var wordToBeAdd = new ALRCWord()
@@ -131,6 +135,19 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                                 Transliteration = word.Transliteration
                             };
                             lineToBeAdded.Words.Add(wordToBeAdd);
+                            textSb.Append(wordToBeAdd.Word);
+                            transliterationSb.Append(wordToBeAdd.Transliteration);
+                        }
+                        if (string.IsNullOrWhiteSpace(lineToBeAdded.RawText))
+                        {
+                            var res = textSb.ToString();
+                            lineToBeAdded.RawText = string.IsNullOrWhiteSpace(res) ? null : res;
+                        }
+
+                        if (string.IsNullOrWhiteSpace(lineToBeAdded.Transliteration))
+                        {
+                            var res = transliterationSb.ToString();
+                            lineToBeAdded.Transliteration = string.IsNullOrWhiteSpace(res) ? null : res;
                         }
                     }
 
@@ -165,7 +182,8 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                     Id = style.Id,
                     Position = (int)(style.Position ?? ALRCStylePosition.Undefined),
                     Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
-                    Type = (int)(style.Type ?? ALRCStyleAccent.Normal)
+                    Type = (int)(style.Type ?? ALRCStyleAccent.Normal),
+                    Hidden = style.HiddenOnBlur
                 });
             }
         }

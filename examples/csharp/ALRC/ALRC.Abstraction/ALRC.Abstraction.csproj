@@ -5,6 +5,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
+        <Title>ALRC.Abstraction</Title>
+        <Authors>Kengwang</Authors>
+        <Description>The abstraction of ALRC</Description>
+        <Copyright>MIT Licence</Copyright>
+        <PackageProjectUrl>https://github.com/kengwang/ALRC</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/kengwang/ALRC/blob/main/examples/csharp/ALRC/LICENCE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/kengwang/ALRC</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>ALRC</PackageTags>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>

@@ -38,7 +38,8 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 {
                     Id = name + "_bg",
                     Position = isAdded ? ALRCStylePosition.Right : ALRCStylePosition.Left,
-                    Type = ALRCStyleAccent.Background
+                    Type = ALRCStyleAccent.Background,
+                    HiddenOnBlur = true
                 });
                 isAdded = true;
             }

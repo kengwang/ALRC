@@ -12,7 +12,7 @@ public class QQLyricConverter : ILyricConverter<string>
         return ConvertCore(input, @"([^(\d+,\d+)]+)\((\d+),(\d+)\)");
     }
 
-    public static ALRCFile ConvertCore(string input, [StringSyntax("regex")] string regex)
+    public static ALRCFile ConvertCore(string input, /*[StringSyntax("regex")]*/ string regex)
     {
         var alrcLines = new List<ALRCLine>();
         var alrc = new ALRCFile
@@ -24,12 +24,12 @@ public class QQLyricConverter : ILyricConverter<string>
             Lines = alrcLines
         };
         bool haveBackground = false;
-        var lines = input.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n");
+        var lines = input.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
         int id = 0;
         foreach (var lineText in lines)
         {
             var alrcLine = new ALRCLine();
-            if (string.IsNullOrWhiteSpace(lineText) || !lineText.StartsWith('[')) continue;
+            if (string.IsNullOrWhiteSpace(lineText) || !lineText.StartsWith("[")) continue;
             if (!char.IsNumber(lineText[1])) continue;
             // 获取开始时间
             var timeEnd = lineText.IndexOf(']');
@@ -38,7 +38,7 @@ public class QQLyricConverter : ILyricConverter<string>
             alrcLine.End = alrcLine.Start + int.Parse(time[1]);
             // 获取歌词
             var lyric = lineText[(timeEnd + 1)..];
-            if (lyric.StartsWith('(') && lyric.EndsWith(')'))
+            if (lyric.StartsWith("(") && lyric.EndsWith(")"))
             {
                 alrcLine.ParentLineId = id.ToString();
                 alrcLines.Last().Id = id.ToString();
@@ -77,7 +77,8 @@ public class QQLyricConverter : ILyricConverter<string>
             alrc.Header.Styles.Add(new ALRCStyle
             {
                 Id = "background",
-                Type = ALRCStyleAccent.Background
+                Type = ALRCStyleAccent.Background,
+                HiddenOnBlur = true
             });
         }
 

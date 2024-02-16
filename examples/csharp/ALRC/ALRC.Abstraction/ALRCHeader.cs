@@ -27,6 +27,10 @@ public class ALRCStyle
     [JsonProperty("t")]
     [JsonPropertyName("t")]
     public ALRCStyleAccent? Type { get; set; } = ALRCStyleAccent.Normal;
+    
+    [JsonProperty("h")]
+    [JsonPropertyName("h")]
+    public bool HiddenOnBlur { get; set; } = false;
 }
 
 public enum ALRCStylePosition

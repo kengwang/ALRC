@@ -51,24 +51,27 @@ public class LyricifySyllableConverter : ILyricConverter<string>
                     {
                         Id = "6",
                         Type = ALRCStyleAccent.Background,
+                        HiddenOnBlur = true,
                         Position = null
                     },
                     new()
                     {
                         Id = "7",
                         Type = ALRCStyleAccent.Background,
+                        HiddenOnBlur = true,
                         Position = ALRCStylePosition.Left
                     },
                     new()
                     {
                         Id = "8",
                         Type = ALRCStyleAccent.Background,
+                        HiddenOnBlur = true,
                         Position = ALRCStylePosition.Right
                     },
                 }
             }
         };
-        var originalLines = input.Replace("\r\n", "\n").Split("\n");
+        var originalLines = input.Replace("\r\n", "\n").Split('\n');
 
         foreach (var originalLine in originalLines)
         {
