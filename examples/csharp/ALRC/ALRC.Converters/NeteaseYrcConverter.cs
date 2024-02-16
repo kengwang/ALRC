@@ -1,4 +1,7 @@
 ﻿using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using ALRC.Abstraction;
 
 namespace ALRC.Converters;
@@ -7,7 +10,7 @@ public class NeteaseYrcConverter : ILyricConverter<string>
 {
     public ALRCFile Convert(string input)
     {
-        throw new NotImplementedException();
+        return QQLyricConverter.ConvertCore(input, @"\((\d+),(\d+)\)([^(\d+,\d+)]+)");
     }
 
     public string ConvertBack(ALRCFile input)
@@ -31,12 +34,14 @@ public class NeteaseYrcConverter : ILyricConverter<string>
                 if (alrcLine.Start is null || alrcLine is { Start: 0, End: 0 })
                 {
                     if (alrcLine.Words is { Count: > 0 })
-                        builder.Append($"[{alrcLine.Words[0].Start},{alrcLine.Words[^1].End - alrcLine.Words[0].Start}]");
+                        builder.Append(
+                            $"[{alrcLine.Words[0].Start},{alrcLine.Words[^1].End - alrcLine.Words[0].Start}]");
                 }
                 else
                 {
                     builder.Append($"[{alrcLine.Start},{alrcLine.End - alrcLine.Start}]");
                 }
+
                 if (input.Header?.Styles?.FirstOrDefault(t => t.Id == alrcLine.LineStyle) is
                     { Type: ALRCStyleAccent.Background or ALRCStyleAccent.Whisper }) isBackground = true;
                 if (isBackground) builder.Append('(');
@@ -57,5 +62,15 @@ public class NeteaseYrcConverter : ILyricConverter<string>
         }
 
         return builder.ToString();
+    }
+}
+
+public class NeteaseHeaderInfo
+{
+    [JsonPropertyName("c")] public List<Component>? Components { get; set; }
+
+    public class Component
+    {
+        [JsonPropertyName("tx")] public string? Text { get; set; }
     }
 }

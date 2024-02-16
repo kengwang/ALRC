@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ALRC.Abstraction;
-using ALRC.Abstraction.Words;
 using ALRC.Converters;
 
 namespace ALRC.Creator.Models;
@@ -25,12 +24,12 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                 if (string.IsNullOrWhiteSpace(style.Id)) continue;
                 alrc.Header.Styles ??= new List<ALRCStyle>();
                 alrc.Header.Styles.Add(new ALRCStyle
-                                       {
-                                           Id = style.Id,
-                                           Position = (ALRCStylePosition)style.Position,
-                                           Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
-                                           Type = (ALRCStyleAccent)style.Type
-                                       });
+                {
+                    Id = style.Id,
+                    Position = (ALRCStylePosition)style.Position,
+                    Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
+                    Type = (ALRCStyleAccent)style.Type
+                });
             }
         }
 
@@ -112,7 +111,7 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                 }
 
                 lineToBeAdded.Transliteration = inputLine.Transliteration;
-                
+
                 if (inputLine.Type == 1)
                 {
                     //Words
@@ -122,15 +121,15 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                         foreach (var word in inputLine.Words)
                         {
                             var wordToBeAdd = new ALRCWord()
-                                              {
-                                                  Start = word.Start,
-                                                  End = word.End,
-                                                  WordStyle = string.IsNullOrWhiteSpace(word.WordStyle)
-                                                      ? null
-                                                      : word.WordStyle,
-                                                  Word = word.Word ?? string.Empty,
-                                                  Transliteration = word.Transliteration
-                                              };
+                            {
+                                Start = word.Start,
+                                End = word.End,
+                                WordStyle = string.IsNullOrWhiteSpace(word.WordStyle)
+                                    ? null
+                                    : word.WordStyle,
+                                Word = word.Word ?? string.Empty,
+                                Transliteration = word.Transliteration
+                            };
                             lineToBeAdded.Words.Add(wordToBeAdd);
                         }
                     }
@@ -162,12 +161,12 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
             {
                 if (string.IsNullOrWhiteSpace(style.Id)) continue;
                 ealrc.Styles.Add(new EditingALRCStyle()
-                                 {
-                                     Id = style.Id,
-                                     Position = (int)(style.Position ?? ALRCStylePosition.Undefined),
-                                     Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
-                                     Type = (int)(style.Type ?? ALRCStyleAccent.Normal)
-                                 });
+                {
+                    Id = style.Id,
+                    Position = (int)(style.Position ?? ALRCStylePosition.Undefined),
+                    Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
+                    Type = (int)(style.Type ?? ALRCStyleAccent.Normal)
+                });
             }
         }
 
@@ -238,33 +237,33 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                         if (string.IsNullOrWhiteSpace(lineTranslation.Key)) continue;
                         lineToBeAdded.Translations = new ObservableCollection<EditingALRCTranslation>();
                         lineToBeAdded.Translations.Add(new EditingALRCTranslation
-                                                       {
-                                                           LanguageTag = lineTranslation.Key,
-                                                           TranslationText = lineTranslation.Value
-                                                       });
+                        {
+                            LanguageTag = lineTranslation.Key,
+                            TranslationText = lineTranslation.Value
+                        });
                     }
 
-                if (lineToBeAdded.Words is { Count: > 0 })
+
+                //Words
+                if (inputLine.Words is { Count: > 0 })
                 {
-                    //Words
-                    if (inputLine.Words is { Count: > 0 })
+                    lineToBeAdded.Type = 1;
+                    lineToBeAdded.Words ??= new();
+                    foreach (var word in inputLine.Words)
                     {
-                        lineToBeAdded.Words ??= new ();
-                        foreach (var word in inputLine.Words)
+                        var wordToBeAdd = new EditingALRCWord()
                         {
-                            var wordToBeAdd = new EditingALRCWord()
-                                              {
-                                                  Start = word.Start,
-                                                  End = word.End,
-                                                  WordStyle = string.IsNullOrWhiteSpace(word.WordStyle)
-                                                      ? null
-                                                      : word.WordStyle,
-                                                  Word = word.Word ?? string.Empty
-                                              };
-                            lineToBeAdded.Words.Add(wordToBeAdd);
-                        }
+                            Start = word.Start,
+                            End = word.End,
+                            WordStyle = string.IsNullOrWhiteSpace(word.WordStyle)
+                                ? null
+                                : word.WordStyle,
+                            Word = word.Word ?? string.Empty
+                        };
+                        lineToBeAdded.Words.Add(wordToBeAdd);
                     }
                 }
+
 
                 ealrc.Lines.Add(lineToBeAdded);
             }

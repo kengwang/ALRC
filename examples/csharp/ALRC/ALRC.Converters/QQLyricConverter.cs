@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using System.Text.RegularExpressions;
 using ALRC.Abstraction;
 
@@ -8,18 +9,80 @@ public class QQLyricConverter : ILyricConverter<string>
 {
     public ALRCFile Convert(string input)
     {
-        var lines = input.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n");
-        foreach (var lineText in lines)
-        {
-            if (string.IsNullOrWhiteSpace(lineText) || !lineText.StartsWith('[')) continue;
-            // 获取开始时间
-            
-        }
-
-        throw new NotImplementedException();
+        return ConvertCore(input, @"([^(\d+,\d+)]+)\((\d+),(\d+)\)");
     }
 
+    public static ALRCFile ConvertCore(string input, [StringSyntax("regex")] string regex)
+    {
+        var alrcLines = new List<ALRCLine>();
+        var alrc = new ALRCFile
+        {
+            Schema = "https://github.com/kengwang/ALRC/blob/main/schemas/v1.json",
+            LyricInfo = null,
+            SongInfo = null,
+            Header = null,
+            Lines = alrcLines
+        };
+        bool haveBackground = false;
+        var lines = input.Replace("\r\n", "\n").Replace("\r", "\n").Split("\n");
+        int id = 0;
+        foreach (var lineText in lines)
+        {
+            var alrcLine = new ALRCLine();
+            if (string.IsNullOrWhiteSpace(lineText) || !lineText.StartsWith('[')) continue;
+            if (!char.IsNumber(lineText[1])) continue;
+            // 获取开始时间
+            var timeEnd = lineText.IndexOf(']');
+            var time = lineText[1..timeEnd].Split(',');
+            alrcLine.Start = int.Parse(time[0]);
+            alrcLine.End = alrcLine.Start + int.Parse(time[1]);
+            // 获取歌词
+            var lyric = lineText[(timeEnd + 1)..];
+            if (lyric.StartsWith('(') && lyric.EndsWith(')'))
+            {
+                alrcLine.ParentLineId = id.ToString();
+                alrcLines.Last().Id = id.ToString();
+                alrcLine.Id = (++id).ToString();
+                alrcLine.LineStyle = "background";
+                haveBackground = true;
+                lyric = lyric[1..^1];
+            }
 
+            var words = new List<ALRCWord>();
+            var sb = new StringBuilder();
+            var wordMatches = Regex.Matches(lyric, regex);
+            foreach (Match wordMatch in wordMatches)
+            {
+                var word = wordMatch.Groups[1].Value;
+                var start = int.Parse(wordMatch.Groups[2].Value);
+                var end = int.Parse(wordMatch.Groups[3].Value);
+                words.Add(new ALRCWord
+                {
+                    Word = word,
+                    Start = start,
+                    End = start +  end
+                });
+                sb.Append(word);
+            }
+
+            alrcLine.Words = words;
+            alrcLine.RawText = sb.ToString();
+            alrcLines.Add(alrcLine);
+        }
+
+        if (haveBackground)
+        {
+            alrc.Header ??= new ALRCHeader();
+            alrc.Header.Styles ??= new List<ALRCStyle>();
+            alrc.Header.Styles.Add(new ALRCStyle
+            {
+                Id = "background",
+                Type = ALRCStyleAccent.Background
+            });
+        }
+
+        return alrc;
+    }
 
     public string ConvertBack(ALRCFile input)
     {
@@ -42,7 +105,8 @@ public class QQLyricConverter : ILyricConverter<string>
                 if (alrcLine.Start is null || alrcLine is { Start: 0, End: 0 })
                 {
                     if (alrcLine.Words is { Count: > 0 })
-                        builder.Append($"[{alrcLine.Words[0].Start},{alrcLine.Words[^1].End - alrcLine.Words[0].Start}]");
+                        builder.Append(
+                            $"[{alrcLine.Words[0].Start},{alrcLine.Words[^1].End - alrcLine.Words[0].Start}]");
                 }
                 else
                 {

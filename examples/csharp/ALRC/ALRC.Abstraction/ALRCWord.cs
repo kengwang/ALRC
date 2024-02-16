@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
-namespace ALRC.Abstraction.Words;
+namespace ALRC.Abstraction;
 
 public class ALRCWord
 {

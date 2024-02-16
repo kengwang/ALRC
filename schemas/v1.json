@@ -230,6 +230,12 @@
             "string"
           ]
         },
+        "lt": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
         "tr": {
           "type": [
             "null",
@@ -269,6 +275,12 @@
           "type": "string"
         },
         "s": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "l": {
           "type": [
             "null",
             "string"
