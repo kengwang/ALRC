@@ -54,20 +54,49 @@ public class EditingALRC : IModel
     }
 }
 
-public class EditingALRCWord
+public class EditingALRCWord : IModel
 {
     private string? _displayWord;
+    private string? _transliteration;
     public long Start { get; set; }
     public long End { get; set; }
     public string? Word { get; set; }
     public string? WordStyle { get; set; }
 
-    public string? Transliteration { get; set; }
-    
+    public string? Transliteration
+    {
+        get => _transliteration;
+        set
+        {
+            SetField(ref _transliteration, value);
+            OnPropertyChanged(nameof(DisplayWord));
+        }
+    }
+
     public string? DisplayWord
     {
-        get => _displayWord ?? Word;
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(_transliteration))
+                return $"{Word} ({_transliteration})";
+            return _displayWord ?? Word;
+        }
         set => _displayWord = value;
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
     }
 }
 
@@ -79,7 +108,7 @@ public class EditingALRCLine : IModel
     private string? _lineStyle;
     private string? _comment;
     private string? _text;
-    private ObservableCollection<EditingALRCTranslation> _translations = new ();
+    private string? _translation;
     private string? _id;
     private string? _parentLineId;
     private ObservableCollection<EditingALRCWord>? _words = new();
@@ -146,10 +175,10 @@ public class EditingALRCLine : IModel
         set => SetField(ref _text, value);
     }
 
-    public ObservableCollection<EditingALRCTranslation> Translations
+    public string? Translation
     {
-        get => _translations;
-        set => SetField(ref _translations, value);
+        get => _translation;
+        set => SetField(ref _translation, value);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -168,38 +197,6 @@ public class EditingALRCLine : IModel
     }
 }
 
-public class EditingALRCTranslation : IModel
-{
-    private string? _languageTag;
-    private string? _translationText;
-
-    public string? LanguageTag
-    {
-        get => _languageTag;
-        set => SetField(ref _languageTag, value);
-    }
-
-    public string? TranslationText
-    {
-        get => _translationText;
-        set => SetField(ref _translationText, value);
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
-    }
-}
 
 public class EditingALRCStyle : IModel
 {

@@ -82,7 +82,7 @@
                 x:Name="LineInfoEditor"
                 Grid.Row="0"
                 Visibility="Collapsed">
-                <DockPanel LastChildFill="True">
+                <DockPanel>
 
                     <Grid DockPanel.Dock="Top" Margin="0,5">
                         <Grid.ColumnDefinitions>
@@ -229,29 +229,19 @@
                             Margin="5,0"
                             HorizontalContentAlignment="Center"
                             Content="{x:Static t:Languages.LineEditing_Line_Translation}" />
-                        <ui:DataGrid
-                            Grid.Column="1"
-                            Padding="5"
-                            AreRowDetailsFrozen="False"
-                            AutoGenerateColumns="False"
-                            CanUserAddRows="True"
-                            CanUserDeleteRows="True"
-                            VerticalScrollBarVisibility="Auto"
-                            CanUserReorderColumns="false"
-                            CanUserSortColumns="False"
-                            ColumnHeaderHeight="32"
-                            FrozenColumnCount="1"
-                            GridLinesVisibility="All"
-                            HeadersVisibility="Column"
-                            IsReadOnly="False"
-                            ItemsSource="{Binding FocusingLine.Translations, Mode=TwoWay}"
-                            RowDetailsVisibilityMode="Collapsed"
-                            SelectionMode="Single" >
-                            <ui:DataGrid.Columns>
-                                <DataGridTextColumn Width="50" Binding="{Binding LanguageTag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static t:Languages.LinesEdit_Line_Translation_Language}" />
-                                <DataGridTextColumn Width="320" Binding="{Binding  TranslationText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="{x:Static t:Languages.LinesEdit_Line_Translation_Content}" />
-                            </ui:DataGrid.Columns>
-                        </ui:DataGrid>
+                        <TextBox Grid.Column="1" VerticalAlignment="Top" Text="{Binding FocusingLine.Translation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                    <Grid DockPanel.Dock="Top" Margin="0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Margin="5,0"
+                            HorizontalContentAlignment="Center"
+                            Content="{x:Static t:Languages.LineEditing_Line_Transliteration}" />
+                        <TextBox Grid.Column="1" VerticalAlignment="Top" Text="{Binding FocusingLine.Transliteration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </DockPanel>
             </Grid>

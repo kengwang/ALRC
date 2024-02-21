@@ -147,6 +147,9 @@
               "$ref": "#/definitions/ALRCStyleAccent"
             }
           ]
+        },
+        "h": {
+          "type": "boolean"
         }
       }
     },
@@ -239,14 +242,8 @@
         "tr": {
           "type": [
             "null",
-            "object"
-          ],
-          "additionalProperties": {
-            "type": [
-              "null",
-              "string"
-            ]
-          }
+            "string"
+          ]
         },
         "w": {
           "type": [

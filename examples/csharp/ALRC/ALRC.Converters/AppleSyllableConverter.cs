@@ -6,6 +6,7 @@ namespace ALRC.Converters;
 
 public class AppleSyllableConverter : ILyricConverter<string>
 {
+    // 部分遵循 AMLL 规范
     public ALRCFile Convert(string input)
     {
         var ttml = new XmlDocument();
@@ -55,6 +56,11 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 alrcLine.Start = (int)startLine.TotalMilliseconds;
             if (TimeSpan.TryParseExact(end, @"mm\:ss\.fff", null, out var endLine))
                 alrcLine.End = (int)endLine.TotalMilliseconds;
+            alrcLine.Translation = p.GetElementsByTagName("span").Cast<XmlElement>()
+                .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
+                ?.InnerText;
+            alrcLine.Transliteration = p.GetElementsByTagName("span").Cast<XmlElement>()
+                .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")?.InnerText;
             alrcLine.Words = new List<ALRCWord>();
             var words = p.ChildNodes.Cast<XmlElement>().Where(t => t.Name == "span" && !t.HasAttribute("ttm:role"))
                 .ToList();
@@ -82,7 +88,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
             alrcLine.RawText = sb.ToString();
             lines.Add(alrcLine);
             var subLineElements = p.GetElementsByTagName("span").Cast<XmlElement>()
-                .Where(t => t.HasAttribute("ttm:role")).ToList();
+                .Where(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-bg").ToList();
             if (subLineElements is { Count: > 0 })
                 foreach (var subLineElement in subLineElements)
                 {
@@ -141,11 +147,11 @@ public class AppleSyllableConverter : ILyricConverter<string>
         root.AppendChild(head);
         var metadata = ttml.CreateElement("metadata");
         head.AppendChild(metadata);
-        var agentsA = ttml.CreateElement("ttm", "agent","http://www.w3.org/ns/ttml#metadata");
+        var agentsA = ttml.CreateElement("ttm", "agent", "http://www.w3.org/ns/ttml#metadata");
         agentsA.SetAttribute("type", "person");
         agentsA.SetAttribute("xml:id", "v1");
         metadata.AppendChild(agentsA);
-        var agentsB = ttml.CreateElement("ttm", "agent","http://www.w3.org/ns/ttml#metadata");
+        var agentsB = ttml.CreateElement("ttm", "agent", "http://www.w3.org/ns/ttml#metadata");
         agentsB.SetAttribute("type", "other");
         agentsB.SetAttribute("xml:id", "v2");
         metadata.AppendChild(agentsB);
@@ -162,18 +168,19 @@ public class AppleSyllableConverter : ILyricConverter<string>
         Dictionary<string, XmlElement> parentElements = new Dictionary<string, XmlElement>();
         foreach (var line in input.Lines)
         {
+            if (string.IsNullOrWhiteSpace(line.RawText) && line.Words is not { Count: > 0 }) continue;
             bool isSubline = false;
             var parent = div;
             var lineElement = ttml.CreateElement("p");
-            lineElement.SetAttribute("key","http://music.apple.com/lyric-ttml-internal" ,$"L{key++}");
-            lineElement.SetAttribute("agent","http://www.w3.org/ns/ttml#metadata", "v1");
-            if (input.Header?.Styles?.FirstOrDefault(t => t.Id == line.LineStyle) is {  } alrcStyle)
+            lineElement.SetAttribute("key", "http://music.apple.com/lyric-ttml-internal", $"L{key++}");
+            lineElement.SetAttribute("agent", "http://www.w3.org/ns/ttml#metadata", "v1");
+            if (input.Header?.Styles?.FirstOrDefault(t => t.Id == line.LineStyle) is { } alrcStyle)
             {
                 // 存在样式
                 if (alrcStyle.Type == ALRCStyleAccent.Background)
                 {
                     lineElement = ttml.CreateElement("span");
-                    lineElement.SetAttribute("role","http://www.w3.org/ns/ttml#metadata", "x-bg");
+                    lineElement.SetAttribute("role", "http://www.w3.org/ns/ttml#metadata", "x-bg");
                     parent = parentElements[line.ParentLineId!];
                     isSubline = true;
                 }
@@ -183,8 +190,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     ALRCStylePosition.Right => "v2",
                     _ => "v1"
                 };
-                lineElement.SetAttribute("agent","http://www.w3.org/ns/ttml#metadata", agent);
-
+                lineElement.SetAttribute("agent", "http://www.w3.org/ns/ttml#metadata", agent);
             }
 
             parent.AppendChild(lineElement);
@@ -192,12 +198,30 @@ public class AppleSyllableConverter : ILyricConverter<string>
             {
                 parentElements[line.Id] = lineElement;
             }
-            lineElement.SetAttribute("begin", TimeSpan.FromMilliseconds(line.Start??0).ToString(@"mm\:ss\.fff"));
-            lineElement.SetAttribute("end", TimeSpan.FromMilliseconds(line.End??0).ToString(@"mm\:ss\.fff"));
+
+            lineElement.SetAttribute("begin", TimeSpan.FromMilliseconds(line.Start ?? 0).ToString(@"mm\:ss\.fff"));
+            lineElement.SetAttribute("end", TimeSpan.FromMilliseconds(line.End ?? 0).ToString(@"mm\:ss\.fff"));
+            if (!string.IsNullOrWhiteSpace(line.Transliteration))
+            {
+                var span = ttml.CreateElement("span");
+                span.SetAttribute("role", "http://www.w3.org/ns/ttml#metadata",
+                    "x-roman"); // romaji not roman, but AMLL use it.
+                span.InnerText = line.Transliteration!;
+                lineElement.AppendChild(span);
+            }
+
+            if (!string.IsNullOrWhiteSpace(line.Translation))
+            {
+                var span = ttml.CreateElement("span");
+                span.SetAttribute("role", "http://www.w3.org/ns/ttml#metadata",
+                    "x-translation"); // romaji not roman, but AMLL use it.
+                span.InnerText = line.Translation!;
+                lineElement.AppendChild(span);
+            }
+
             bool isFirst = true;
             if (line.Words is not null)
             {
-                
                 foreach (var word in line.Words)
                 {
                     var span = ttml.CreateElement("span");
@@ -217,10 +241,9 @@ public class AppleSyllableConverter : ILyricConverter<string>
             {
                 lineElement.InnerText = line.RawText ?? string.Empty;
             }
-
         }
 
-        
+
         return ttml.InnerXml;
     }
 }

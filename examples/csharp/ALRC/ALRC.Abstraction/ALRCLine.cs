@@ -41,7 +41,7 @@ public class ALRCLine
 
     [JsonProperty("tr")]
     [JsonPropertyName("tr")]
-    public Dictionary<string, string?>? LineTranslations { get; set; }
+    public string? Translation { get; set; }
 
     [JsonProperty("w")]
     [JsonPropertyName("w")]

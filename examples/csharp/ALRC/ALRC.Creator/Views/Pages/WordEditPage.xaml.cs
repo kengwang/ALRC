@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 using ALRC.Creator.Models;
 using ALRC.Creator.Models.ViewModels;
 using Kawazu;
+using NMeCab.Specialized;
 
 namespace ALRC.Creator.Views.Pages;
 
@@ -277,13 +279,18 @@ public partial class WordEditPage : Page
             // 日文分词
             var kawazu = new KawazuConverter();
             var divisions = await kawazu.GetDivisions(line.Text, To.Romaji, Mode.Spaced);
+            var elements = new List<JapaneseElement>();
             foreach (var division in divisions)
             {
+                elements.AddRange(division);
+            }
+            foreach (var element in elements)
+            {
+                var romaji = Utilities.ToRawRomaji(element.HiraNotation);
                 var lrcWord = new EditingALRCWord
                 {
-                    Word = division.Surface,
-                    Transliteration = division.RomaReading,
-                    DisplayWord = $"{division.Surface} ({division.RomaReading})"
+                    Word = element.Element,
+                    Transliteration = romaji,
                 };
                 line.Words ??= new();
 

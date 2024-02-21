@@ -84,16 +84,9 @@ public partial class ConvertPage : Page
         var alrc = new EditableALRCConverter().Convert(_viewModel.Alrc);
         var converter = new LrcTranslationConverter();
         var trLine =
-            alrc.Lines.FirstOrDefault(t => !string.IsNullOrWhiteSpace(t.LineTranslations?.FirstOrDefault().Key));
-        string? lang = null;
-        if (trLine is not null) lang = trLine.LineTranslations!.FirstOrDefault().Key!;
-        else
-        {
-            MessageBox.Show("No Translation Founded");
-            return;
-        }
+            alrc.Lines.FirstOrDefault(t => !string.IsNullOrWhiteSpace(t.Translation));
 
-        var lrcText = converter.Convert(alrc, lang);
+        var lrcText = converter.Convert(alrc);
         var dialog = new SaveFileDialog();
         dialog.Filter = "LRC 文件|*.lrc";
         if (dialog.ShowDialog() is true)
@@ -227,7 +220,7 @@ public partial class ConvertPage : Page
         var converter = new AppleSyllableConverter();
         var lrcText = converter.ConvertBack(alrc);
         var dialog = new SaveFileDialog();
-        dialog.Filter = "YRC 文件|*.yrc";
+        dialog.Filter = "TTML 文件|*.ttml";
         if (dialog.ShowDialog() is true)
         {
             File.WriteAllText(dialog.FileName, lrcText);

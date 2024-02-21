@@ -104,14 +104,7 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                     : inputLine.Text;
                 lineToBeAdded.Start = inputLine.Start;
                 lineToBeAdded.End = inputLine.End;
-                foreach (var lineTranslation in inputLine.Translations)
-                {
-                    if (string.IsNullOrWhiteSpace(lineTranslation.LanguageTag)) continue;
-                    lineToBeAdded.LineTranslations ??= new Dictionary<string, string?>();
-                    lineToBeAdded.LineTranslations[lineTranslation.LanguageTag] =
-                        lineTranslation.TranslationText;
-                }
-
+                lineToBeAdded.Translation = inputLine.Translation;
                 lineToBeAdded.Transliteration = inputLine.Transliteration;
 
                 if (inputLine.Type == 1)
@@ -249,17 +242,8 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                 lineToBeAdded.Type = lineToBeAdded.Words is { Count: > 0 } ? 1 : 0;
                 lineToBeAdded.Start = inputLine.Start ?? 0;
                 lineToBeAdded.End = inputLine.End ?? 0;
-                if (inputLine.LineTranslations is { Count: > 0 })
-                    foreach (var lineTranslation in inputLine.LineTranslations)
-                    {
-                        if (string.IsNullOrWhiteSpace(lineTranslation.Key)) continue;
-                        lineToBeAdded.Translations = new ObservableCollection<EditingALRCTranslation>();
-                        lineToBeAdded.Translations.Add(new EditingALRCTranslation
-                        {
-                            LanguageTag = lineTranslation.Key,
-                            TranslationText = lineTranslation.Value
-                        });
-                    }
+                lineToBeAdded.Translation = inputLine.Translation;
+                lineToBeAdded.Transliteration = inputLine.Transliteration;
 
 
                 //Words

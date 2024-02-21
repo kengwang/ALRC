@@ -163,11 +163,7 @@ public partial class LinesEditPage : Page
                     var translation = line.Substring(line.IndexOf("[[", StringComparison.Ordinal) + 2,
                         line.IndexOf("]]", StringComparison.Ordinal) - line.IndexOf("[[", StringComparison.Ordinal) -
                         2);
-                    alrcLine.Translations.Add(new EditingALRCTranslation
-                    {
-                        LanguageTag = lang,
-                        TranslationText = translation
-                    });
+                    alrcLine.Translation = translation;
                 }
                 else
                 {
@@ -282,21 +278,13 @@ public partial class LinesEditPage : Page
     {
         if (string.IsNullOrWhiteSpace(_viewModel.QuickInputTexts)) return;
         var convLines = _viewModel.QuickInputTexts.Replace("\r\n", "\n").Replace("\r", "\n");
-        if (!convLines.StartsWith("tr:"))
-            return;
-        var lang = _viewModel.QuickInputTexts.Substring(3, convLines.IndexOf('\n') - 3);
         var lines = convLines.Split('\n').ToList();
-        lines.RemoveAt(0);
 
         for (var index = 0; index < _viewModel.EditingAlrc.Lines.Count; index++)
         {
             var alrcLine = _viewModel.EditingAlrc.Lines[index];
             if (lines.Count <= index) break;
-            alrcLine.Translations.Add(new EditingALRCTranslation
-            {
-                LanguageTag = lang,
-                TranslationText = lines[index]
-            });
+            alrcLine.Translation = lines[index];
         }
 
         QuickInputBox.Visibility =

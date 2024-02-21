@@ -5,7 +5,7 @@ namespace ALRC.Converters;
 
 public class LrcTranslationConverter : ILrcTranslationConverter<string>
 {
-    public string Convert(ALRCFile input, string lang)
+    public string Convert(ALRCFile input)
     {
         var builder = new StringBuilder();
         // Order Lines
@@ -23,14 +23,14 @@ public class LrcTranslationConverter : ILrcTranslationConverter<string>
                 var startTimeString = TimeSpan.FromMilliseconds(System.Convert.ToDouble(inputLine.Start))
                     .ToString(@"mm\:ss\.ff");
                 builder.AppendLine(
-                    $"[{startTimeString}] {inputLine.LineTranslations?.GetValueOrDefault(lang) ?? string.Empty}");
+                    $"[{startTimeString}] {inputLine.Translation ?? string.Empty}");
             }
         }
 
         return builder.ToString();
     }
 
-    public ALRCFile ConvertBack(string input, ALRCFile target, string lang)
+    public ALRCFile ConvertBack(string input, ALRCFile target)
     {
         throw new NotImplementedException();
     }
