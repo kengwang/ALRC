@@ -55,6 +55,12 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                 alrc.LyricInfo ??= new ALRCLyricInfo();
                 alrc.LyricInfo.Language = input.LyricInfo.Language;
             }
+            
+            if (!string.IsNullOrWhiteSpace(input.LyricInfo.Translation))
+            {
+                alrc.LyricInfo ??= new ALRCLyricInfo();
+                alrc.LyricInfo.Language = input.LyricInfo.Translation;
+            }
 
             if (!string.IsNullOrWhiteSpace(input.LyricInfo.Proofread))
             {
@@ -193,6 +199,11 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
             if (!string.IsNullOrWhiteSpace(input.LyricInfo?.Author))
             {
                 ealrc.LyricInfo.Author = input.LyricInfo.Author;
+            }
+            
+            if (!string.IsNullOrWhiteSpace(input.LyricInfo?.Translation))
+            {
+                ealrc.LyricInfo.Author = input.LyricInfo.Translation;
             }
 
             if (!string.IsNullOrWhiteSpace(input.LyricInfo?.Language))

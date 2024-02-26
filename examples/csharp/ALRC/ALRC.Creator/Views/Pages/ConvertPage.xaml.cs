@@ -82,11 +82,11 @@ public partial class ConvertPage : Page
     private void ConvertTranslationToLrc_Click(object sender, RoutedEventArgs e)
     {
         var alrc = new EditableALRCConverter().Convert(_viewModel.Alrc);
-        var converter = new LrcTranslationConverter();
+        var converter = new LrcTranslationEnhancer();
         var trLine =
             alrc.Lines.FirstOrDefault(t => !string.IsNullOrWhiteSpace(t.Translation));
 
-        var lrcText = converter.Convert(alrc);
+        var lrcText = converter.Enhance(alrc);
         var dialog = new SaveFileDialog();
         dialog.Filter = "LRC 文件|*.lrc";
         if (dialog.ShowDialog() is true)

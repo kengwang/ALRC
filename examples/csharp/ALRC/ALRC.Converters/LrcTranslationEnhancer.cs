@@ -1,11 +1,12 @@
 ﻿using System.Text;
 using ALRC.Abstraction;
+using Opportunity.LrcParser;
 
 namespace ALRC.Converters;
 
-public class LrcTranslationConverter : ILrcTranslationConverter<string>
+public class LrcTranslationEnhancer : ILyricEnhancer<string>
 {
-    public string Convert(ALRCFile input)
+    public string Enhance(ALRCFile input)
     {
         var builder = new StringBuilder();
         // Order Lines
@@ -30,8 +31,18 @@ public class LrcTranslationConverter : ILrcTranslationConverter<string>
         return builder.ToString();
     }
 
-    public ALRCFile ConvertBack(string input, ALRCFile target)
+    public ALRCFile Deserialize(string input, ALRCFile target)
     {
-        throw new NotImplementedException();
+        var parseResult = Lyrics.Parse(input);
+        foreach (var lyricsLine in parseResult.Lyrics.Lines)
+        {
+            var lrcTime = (long)(lyricsLine.Timestamp - DateTime.MinValue).TotalMilliseconds;
+            var line = target.Lines.FirstOrDefault(t => t.Start == lrcTime);
+            if (line is null)
+                continue;
+            line.Translation = lyricsLine.Content;
+        }
+
+        return target;
     }
 }
