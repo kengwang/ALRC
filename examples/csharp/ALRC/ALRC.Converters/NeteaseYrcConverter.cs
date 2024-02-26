@@ -10,7 +10,7 @@ public class NeteaseYrcConverter : ILyricConverter<string>
 {
     public ALRCFile Convert(string input)
     {
-        return QQLyricConverter.ConvertCore(input, @"\((\d+),(\d+)\)([^(\d+,\d+)]+)");
+        return QQLyricConverter.ConvertCore(input, @"\((\d+),(\d+),0\)([^(\d+,\d+)]+)");
     }
 
     public string ConvertBack(ALRCFile input)
@@ -50,7 +50,7 @@ public class NeteaseYrcConverter : ILyricConverter<string>
                     {
                         var alrcLineWord = alrcLine.Words[index];
                         builder.Append(
-                            $"({alrcLineWord.Start},{alrcLineWord.End - alrcLineWord.Start})" +
+                            $"({alrcLineWord.Start},{alrcLineWord.End - alrcLineWord.Start},0)" +
                             $"{alrcLineWord.Word}" +
                             (index == alrcLine.Words.Count - 1 && isBackground
                                 ? ")"

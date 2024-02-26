@@ -38,14 +38,14 @@ public class QQLyricConverter : ILyricConverter<string>
             alrcLine.End = alrcLine.Start + int.Parse(time[1]);
             // 获取歌词
             var lyric = lineText[(timeEnd + 1)..];
-            if (lyric.StartsWith("(") && lyric.EndsWith(")"))
+            if (Regex.IsMatch(lyric, @"^\(.*\)\([0-9]*,[0-9]*\)"))
             {
                 alrcLine.ParentLineId = id.ToString();
                 alrcLines.Last().Id = id.ToString();
                 alrcLine.Id = (++id).ToString();
                 alrcLine.LineStyle = "background";
                 haveBackground = true;
-                lyric = lyric[1..^1];
+                lyric = Regex.Replace(lyric,@"^\((.*)\)\(([0-9]*),([0-9]*)\)", @"$1($2,$3)");
             }
 
             var words = new List<ALRCWord>();
