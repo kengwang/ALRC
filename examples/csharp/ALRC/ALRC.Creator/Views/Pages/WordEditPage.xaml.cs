@@ -290,7 +290,7 @@ public partial class WordEditPage : Page
                 var lrcWord = new EditingALRCWord
                 {
                     Word = element.Element,
-                    Transliteration = romaji,
+                    Transliteration = string.IsNullOrWhiteSpace(romaji) ? null : $"{romaji} ",
                 };
                 line.Words ??= new();
 
