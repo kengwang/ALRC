@@ -147,6 +147,7 @@ public class LyricifySyllableConverter : ILyricConverter<string>
                 builder.Append($"[{attribute}]");
 
                 if (alrcLine.Words is { Count: > 0 })
+                {
                     for (var index = 0; index < alrcLine.Words.Count; index++)
                     {
                         var alrcLineWord = alrcLine.Words[index];
@@ -154,6 +155,11 @@ public class LyricifySyllableConverter : ILyricConverter<string>
                             $"{alrcLineWord.Word}" +
                             $"({alrcLineWord.Start},{alrcLineWord.End - alrcLineWord.Start})");
                     }
+                }
+                else
+                {
+                    builder.Append($"({alrcLine.Start},{alrcLine.End - alrcLine.Start})");
+                }
 
                 builder.AppendLine();
             }

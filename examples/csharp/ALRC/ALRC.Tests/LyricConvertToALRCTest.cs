@@ -49,7 +49,7 @@ public class LyricConvertToALRCTest
     public void LyricifySyllableToALRCTest(string lyric)
     {
         // Arrange
-        var converter = new NeteaseYrcConverter();
+        var converter = new LyricifySyllableConverter();
         // Act
         var result = converter.Convert(lyric);
         // Assert

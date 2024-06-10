@@ -9,10 +9,10 @@ public class QQLyricConverter : ILyricConverter<string>
 {
     public ALRCFile Convert(string input)
     {
-        return ConvertCore(input, @"([^(\d+,\d+)]+)\((\d+),(\d+)\)");
+        return ConvertCore(input, @"(?<word>.*?)\((?<start>\d+),(?<end>\d+)\)",@"(?<=^\[\d+,\d+\])\(|(?<=^\[\d+,\d+\]\(.*)\)$");
     }
 
-    public static ALRCFile ConvertCore(string input, /*[StringSyntax("regex")]*/ string regex)
+    public static ALRCFile ConvertCore(string input, /*[StringSyntax("regex")]*/ string regex, /*[StringSyntax("regex")]*/ string backgroundRegex)
     {
         var alrcLines = new List<ALRCLine>();
         var alrc = new ALRCFile
@@ -23,9 +23,9 @@ public class QQLyricConverter : ILyricConverter<string>
             Header = null,
             Lines = alrcLines
         };
-        bool haveBackground = false;
+        var haveBackground = false;
         var lines = input.Replace("\r\n", "\n").Replace("\r", "\n").Split('\n');
-        int id = 0;
+        var id = 0;
         foreach (var lineText in lines)
         {
             var alrcLine = new ALRCLine();
@@ -38,14 +38,14 @@ public class QQLyricConverter : ILyricConverter<string>
             alrcLine.End = alrcLine.Start + int.Parse(time[1]);
             // 获取歌词
             var lyric = lineText[(timeEnd + 1)..];
-            if (Regex.IsMatch(lyric, @"^\(.*\)\([0-9]*,[0-9]*\)"))
+            if (Regex.IsMatch(lyric, backgroundRegex))
             {
                 alrcLine.ParentLineId = id.ToString();
                 alrcLines.Last().Id = id.ToString();
                 alrcLine.Id = (++id).ToString();
                 alrcLine.LineStyle = "background";
                 haveBackground = true;
-                lyric = Regex.Replace(lyric,@"^\((.*)\)\(([0-9]*),([0-9]*)\)", @"$1($2,$3)");
+                lyric = Regex.Replace(lyric,backgroundRegex, "");
             }
 
             var words = new List<ALRCWord>();
@@ -53,9 +53,9 @@ public class QQLyricConverter : ILyricConverter<string>
             var wordMatches = Regex.Matches(lyric, regex);
             foreach (Match wordMatch in wordMatches)
             {
-                var word = wordMatch.Groups[1].Value;
-                var start = int.Parse(wordMatch.Groups[2].Value);
-                var end = int.Parse(wordMatch.Groups[3].Value);
+                var word = wordMatch.Groups["word"].Value;
+                var start = int.Parse(wordMatch.Groups["start"].Value);
+                var end = int.Parse(wordMatch.Groups["end"].Value);
                 words.Add(new ALRCWord
                 {
                     Word = word,

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ALRC.Creator.Extensions;
 using ALRC.Creator.Models;
 using ALRC.Creator.Models.ViewModels;
 using Kawazu;
@@ -198,7 +200,8 @@ public partial class WordEditPage : Page
         {
             if (string.IsNullOrEmpty(line?.Text)) continue;
             var first = false;
-            var words = Regex.Replace(line.Text.Replace("\r\n","\n").Replace("\r","\n").Replace(" "," \n"), "([\\u4e00-\\u9fa5\\u3040-\\u30ff\\uac00-\\ud7a30-9])", "$1\n").Split('\n');
+            var words = Regex.Replace(line.Text.Replace("\r\n", "\n").Replace("\r", "\n").Replace(" ", " \n"),
+                "([\\u4e00-\\u9fa5\\u3040-\\u30ff\\uac00-\\ud7a30-9])", "$1\n").Split('\n');
             foreach (var word in words)
             {
                 var lrcWord = new EditingALRCWord
@@ -271,37 +274,95 @@ public partial class WordEditPage : Page
 
     private async void Btn_AutoParseAll_RightClick(object sender, MouseButtonEventArgs e)
     {
+        var kawazu = new KawazuConverter();
         foreach (var line in LineSelector.SelectedItems.Cast<EditingALRCLine>())
         {
             if (string.IsNullOrWhiteSpace(line?.Text)) continue;
-            line.Words?.Clear();
-            var first = false;
-            // 日文分词
-            var kawazu = new KawazuConverter();
-            var divisions = await kawazu.GetDivisions(line.Text, To.Romaji, Mode.Spaced);
-            var elements = new List<JapaneseElement>();
-            foreach (var division in divisions)
+            if (line.Words is not { Count: > 0 })
             {
-                elements.AddRange(division);
-            }
-            foreach (var element in elements)
-            {
-                var romaji = Utilities.ToRawRomaji(element.HiraNotation);
-                var lrcWord = new EditingALRCWord
+                var first = false;
+                // 日文分词
+                var divisions = await kawazu.GetDivisions(line.Text, To.Romaji, Mode.Spaced);
+                var elements = new List<JapaneseElement>();
+                foreach (var division in divisions)
                 {
-                    Word = element.Element,
-                    Transliteration = string.IsNullOrWhiteSpace(romaji) ? null : $"{romaji} ",
-                };
-                line.Words ??= new();
-
-                if (first)
-                {
-                    line.Words.Clear();
-                    lrcWord.Start = line.Start;
-                    first = false;
+                    elements.AddRange(division);
                 }
 
-                line.Words.Add(lrcWord);
+                foreach (var element in elements)
+                {
+                    var romaji = KawazuExtendedUtilities.ToRawRomaji(element.HiraNotation);
+                    var lrcWord = new EditingALRCWord
+                    {
+                        Word = element.Element,
+                        Transliteration = string.IsNullOrWhiteSpace(romaji) ? null : $"{romaji} ",
+                    };
+                    line.Words ??= new();
+
+                    if (first)
+                    {
+                        line.Words.Clear();
+                        lrcWord.Start = line.Start;
+                        first = false;
+                    }
+
+                    line.Words.Add(lrcWord);
+                }
+            }
+            else
+            {
+                var divitions = await kawazu.GetDivisions(line.Text, To.Romaji, Mode.Spaced);
+                SetRomajiKaraoke(divitions, line.Words);
+            }
+        }
+    }
+
+
+    static void SetRomajiKaraoke(List<Division> romajiInfo, ObservableCollection<EditingALRCWord> wordInfo)
+    {
+        var elements = new List<JapaneseElement>();
+        foreach (var division in romajiInfo)
+        {
+            elements.AddRange(division);
+        }
+
+        int delta = 0;
+        for (var i = 0; i < elements.Count; i++)
+        {
+            var curElement = elements[i].Element;
+            var curHiraNotation = elements[i].HiraNotation;
+            parseOneChar:
+            if (i + delta >= wordInfo.Count)
+            {
+                if (!string.IsNullOrWhiteSpace(curHiraNotation))
+                {
+                    wordInfo[^1].Transliteration +=
+                        KawazuExtendedUtilities.ToRawRomaji(curHiraNotation);
+                }
+
+                break;
+            }
+
+            if (curElement.Contains(wordInfo[i + delta].Word?.Trim() ?? ""))
+            {
+                wordInfo[i + delta].Transliteration =
+                    KawazuExtendedUtilities.ToRawRomaji(curHiraNotation);
+                if (!string.IsNullOrWhiteSpace(wordInfo[i + delta].Word))
+                {
+                    var trimmedWord = wordInfo[i + delta].Word?.Trim() ?? "";
+                    var idx = curElement.IndexOf(trimmedWord, StringComparison.Ordinal);
+                    if (idx >= 0)
+                        curElement = curElement.Remove(idx, trimmedWord.Length);
+                }
+
+                if (curElement.Trim().Length > 0)
+                {
+                    wordInfo[i + delta].Transliteration =
+                        KawazuExtendedUtilities.ToRawRomaji(curHiraNotation.Substring(0, 1));
+                    curHiraNotation = curHiraNotation.Substring(1);
+                    delta++;
+                    goto parseOneChar;
+                }
             }
         }
     }

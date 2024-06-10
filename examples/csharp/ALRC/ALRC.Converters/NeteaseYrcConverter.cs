@@ -10,7 +10,7 @@ public class NeteaseYrcConverter : ILyricConverter<string>
 {
     public ALRCFile Convert(string input)
     {
-        return QQLyricConverter.ConvertCore(input, @"\((\d+),(\d+),0\)([^(\d+,\d+)]+)");
+        return QQLyricConverter.ConvertCore(input, @"\((?<start>\d+),(?<end>\d+),0\)(?<word>.*?)(?=\(\d+,\d+,0\)|$)", @"(?<=\[\d+,\d+\]\(\d+,\d+,0\))\(|(?<=\[\d+,\d+\]\(\d+,\d+,0\)\(.*)\)$");
     }
 
     public string ConvertBack(ALRCFile input)
