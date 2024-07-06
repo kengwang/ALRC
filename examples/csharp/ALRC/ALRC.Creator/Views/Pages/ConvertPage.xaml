@@ -21,7 +21,8 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Border CornerRadius="8" Grid.Row="0" Grid.Column="0" Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+        <Border CornerRadius="8" Grid.Row="0" Grid.Column="0" Background="Gray" VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -36,8 +37,9 @@
                 </StackPanel>
             </Grid>
         </Border>
-        
-        <Border Grid.Row="0" CornerRadius="8" Grid.Column="1" Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+
+        <Border Grid.Row="0" CornerRadius="8" Grid.Column="1" Background="Gray" VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -56,8 +58,9 @@
                 </Grid>
             </Grid>
         </Border>
-        
-        <Border CornerRadius="8" Grid.Row="0" Grid.Column="2" Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+
+        <Border CornerRadius="8" Grid.Row="0" Grid.Column="2" Background="Gray" VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -72,9 +75,10 @@
                 </StackPanel>
             </Grid>
         </Border>
-        
-        
-        <Border CornerRadius="8" Grid.Row="1" Grid.Column="0"  Background="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+
+
+        <Border CornerRadius="8" Grid.Row="1" Grid.Column="0" Background="Gray" VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -89,8 +93,9 @@
                 </StackPanel>
             </Grid>
         </Border>
-        
-        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" Background="Gray" HorizontalAlignment="Stretch" Margin="8">
+
+        <Border CornerRadius="8" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" Background="Gray"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -104,8 +109,9 @@
                     <Button Click="ConvertToTTML_Click">To TTML</Button>
                 </StackPanel>
             </Grid>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Background="Gray" HorizontalAlignment="Stretch" Margin="8">
+        </Border>
+        <Border CornerRadius="8" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" Background="Gray"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -119,8 +125,9 @@
                     <Button Click="ConvertToLyricifySyllable_Click">Convert To</Button>
                 </StackPanel>
             </Grid>
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Background="Gray" HorizontalAlignment="Stretch" Margin="8">
+        </Border>
+        <Border CornerRadius="8" Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Background="Gray"
+                HorizontalAlignment="Stretch" Margin="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -133,6 +140,22 @@
                     <Button Click="ConvertTranslationToLrc_Click">Export LRC</Button>
                 </StackPanel>
             </Grid>
-        </Grid>
+        </Border>
+        <Border CornerRadius="8" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Background="Gray"
+                HorizontalAlignment="Stretch" Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <fa:FontAwesome FontSize="80" Grid.Row="0" Icon="FileText" />
+                <TextBlock Grid.Row="1" TextAlignment="Center" FontSize="35" Text="SRT" />
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Click="ConvertFromSRT_Click">From SRT</Button>
+                    <Button Click="ConvertToSRT_Click">To SRT</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

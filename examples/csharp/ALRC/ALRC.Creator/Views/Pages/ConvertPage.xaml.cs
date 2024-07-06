@@ -239,4 +239,34 @@ public partial class ConvertPage : Page
             File.WriteAllText(dialog.FileName, lrcText);
         }
     }
+
+    private void ConvertFromSRT_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new OpenFileDialog();
+        dialog.Filter = "SRT 文件|*.srt";
+        if (dialog.ShowDialog() is true)
+        {
+            var lrc = File.ReadAllText(dialog.FileName);
+            var converter = new SrtConverter();
+            var alrcFile = converter.Convert(lrc);
+            var result = new EditableALRCConverter().ConvertBack(alrcFile);
+            _viewModel.Alrc.Lines = result.Lines;
+            _viewModel.Alrc.Styles = result.Styles;
+            _viewModel.Alrc.SongInfos = result.SongInfos;
+            _viewModel.Alrc.LyricInfo = result.LyricInfo;
+        }
+    }
+
+    private void ConvertToSRT_Click(object sender, RoutedEventArgs e)
+    {
+        var alrc = new EditableALRCConverter().Convert(_viewModel.Alrc);
+        var converter = new SrtConverter();
+        var lrcText = converter.ConvertBack(alrc);
+        var dialog = new SaveFileDialog();
+        dialog.Filter = "SRT 文件|*.srt";
+        if (dialog.ShowDialog() is true)
+        {
+            File.WriteAllText(dialog.FileName, lrcText);
+        }
+    }
 }
