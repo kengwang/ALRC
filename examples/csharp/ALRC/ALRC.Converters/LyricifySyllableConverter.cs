@@ -75,6 +75,7 @@ public class LyricifySyllableConverter : ILyricConverter<string>
 
         foreach (var originalLine in originalLines)
         {
+            if (originalLine.Length < 3) continue;
             var line = new ALRCLine()
             {
                 Words = new List<ALRCWord>()

@@ -45,8 +45,8 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 });
                 isAdded = true;
             }
-            
-            
+
+
             List<KeyValuePair<string, string>> pairs = [];
             var author = string.Empty;
             foreach (var metadata in head.GetElementsByTagName("amll:meta").Cast<XmlElement>().ToList())
@@ -59,8 +59,9 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     author = value;
                 }
             }
+
             alrc.SongInfo = pairs.ToArray();
-            
+
             // set author info
             if (!string.IsNullOrWhiteSpace(author))
             {
@@ -73,107 +74,80 @@ public class AppleSyllableConverter : ILyricConverter<string>
 
         foreach (var p in ttml.GetElementsByTagName("p").Cast<XmlElement>().ToList())
         {
-            var alrcLine = new ALRCLine();
-            alrcLine.LineStyle = p.GetAttribute("ttm:agent");
-            var begin = p.GetAttribute("begin");
-            var end = p.GetAttribute("end");
-            if (TimeSpan.TryParseExact(begin, @"mm\:ss\.fff", null, out var startLine))
-                alrcLine.Start = (int)startLine.TotalMilliseconds;
-            if (TimeSpan.TryParseExact(end, @"mm\:ss\.fff", null, out var endLine))
-                alrcLine.End = (int)endLine.TotalMilliseconds;
-            alrcLine.Translation = p.GetElementsByTagName("span").Cast<XmlElement>()
-                .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
-                ?.InnerText;
-            alrcLine.Transliteration = p.GetElementsByTagName("span").Cast<XmlElement>()
-                .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")?.InnerText;
-            alrcLine.Words = new List<ALRCWord>();
-            var words = p.ChildNodes;
-            var sb = new StringBuilder();
-            ALRCWord? lastWord = null;
-            foreach (var wordEle in words)
+            void ParseElement(XmlElement element, string style, bool isBackground)
             {
-                
-                if (wordEle is XmlElement span)
+                var alrcLine = new ALRCLine();
+                alrcLine.LineStyle = style + (isBackground ? "_bg" : string.Empty);
+                var begin = element.GetAttribute("begin");
+                var end = element.GetAttribute("end");
+                if (TimeSpan.TryParseExact(begin, @"mm\:ss\.fff", null, out var startLine))
+                    alrcLine.Start = (int)startLine.TotalMilliseconds;
+                if (TimeSpan.TryParseExact(end, @"mm\:ss\.fff", null, out var endLine))
+                    alrcLine.End = (int)endLine.TotalMilliseconds;
+                alrcLine.Translation = element.GetElementsByTagName("span").Cast<XmlElement>()
+                    .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
+                    ?.InnerText;
+                alrcLine.Transliteration = element.GetElementsByTagName("span").Cast<XmlElement>()
+                    .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")
+                    ?.InnerText;
+                alrcLine.Words = new List<ALRCWord>();
+                var words = element.ChildNodes;
+                var sb = new StringBuilder();
+                ALRCWord? lastWord = null;
+                var isStart = isBackground;
+                foreach (var wordEle in words)
                 {
-                    if (span.HasAttribute("ttm:role")) continue;
-                    var word = new ALRCWord
+                    if (wordEle is XmlElement span)
                     {
-                        Word = span.InnerText
-                    };
-                    lastWord = word;
-                    var wordBegin = span.GetAttribute("begin");
-                    var wordEnd = span.GetAttribute("end");
-
-
-                    if (TimeSpan.TryParseExact(wordBegin, @"mm\:ss\.fff", null, out var start))
-                        word.Start = (int)start.TotalMilliseconds;
-                    if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
-                        word.End = (int)e.TotalMilliseconds;
-                    alrcLine.Words.Add(word);
-                    sb.Append(word.Word);
-                }
-
-                if (wordEle is XmlWhitespace wsEle)
-                {
-                    if (lastWord != null) lastWord.Word += wsEle.InnerText;
-                    sb.Append(wsEle.InnerText);
-                }
-            }
-
-            alrcLine.RawText = sb.ToString();
-            lines.Add(alrcLine);
-            var subLineElements = p.GetElementsByTagName("span").Cast<XmlElement>()
-                .Where(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-bg").ToList();
-            if (subLineElements is { Count: > 0 })
-                foreach (var subLineElement in subLineElements)
-                {
-                    var bgalrcLine = new ALRCLine();
-                    bgalrcLine.LineStyle = p.GetAttribute("ttm:agent") + "_bg";
-                    begin = subLineElement.GetAttribute("begin");
-                    end = subLineElement.GetAttribute("end");
-                    if (TimeSpan.TryParseExact(begin, @"mm\:ss\.fff", null, out startLine))
-                        bgalrcLine.Start = (int)startLine.TotalMilliseconds;
-                    if (TimeSpan.TryParseExact(end, @"mm\:ss\.fff", null, out endLine))
-                        bgalrcLine.End = (int)endLine.TotalMilliseconds;
-                    var bgWords = new List<ALRCWord>();
-                    bgalrcLine.Words = bgWords;
-                    var bgSb = new StringBuilder();
-                    var subWords = subLineElement.ChildNodes;
-                    var isStart = true;
-                    ALRCWord? lastW = null;
-                    foreach (var subWordEle in subWords)
-                    {
-                        if (subWordEle is XmlElement span)
+                        if (span.HasAttribute("ttm:role")) continue;
+                        var word = new ALRCWord
                         {
-                            var word = new ALRCWord
-                            {
-                                Word = isStart ? span.InnerText.TrimStart('(') : span.InnerText
-                            };
-                            lastW = word;
-                            isStart = false;
-                            var wordBegin = span.GetAttribute("begin");
-                            var wordEnd = span.GetAttribute("end");
-                            if (TimeSpan.TryParseExact($"00:{wordBegin}", @"mm\:ss\.fff", null, out var start))
-                                word.Start = (int)start.TotalMilliseconds;
-                            if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
-                                word.End = (int)e.TotalMilliseconds;
-                            bgWords.Add(word);
-                            bgSb.Append(word.Word);
-                        }
-                        
-                        if (subWordEle is XmlWhitespace wsEle)
-                        {
-                            if (lastW is not null)
-                                lastW.Word += wsEle.InnerText;
-                            bgSb.Append(wsEle.InnerText);
-                        }
+                            Word = isStart ? span.InnerText.TrimStart('(') : span.InnerText
+                        };
+                        isStart = false;
+                        lastWord = word;
+                        var wordBegin = span.GetAttribute("begin");
+                        var wordEnd = span.GetAttribute("end");
+
+
+                        if (TimeSpan.TryParseExact(wordBegin, @"mm\:ss\.fff", null, out var start))
+                            word.Start = (int)start.TotalMilliseconds;
+                        if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
+                            word.End = (int)e.TotalMilliseconds;
+                        alrcLine.Words.Add(word);
+                        sb.Append(word.Word);
                     }
 
-                    if (bgWords.LastOrDefault() is { } last)
-                        last.Word = last.Word.TrimEnd(')');
-                    bgalrcLine.RawText = bgSb.Remove(bgSb.Length - 1, 1).ToString();
-                    lines.Add(bgalrcLine);
+                    if (wordEle is XmlWhitespace wsEle)
+                    {
+                        if (lastWord != null) lastWord.Word += wsEle.InnerText;
+                        sb.Append(wsEle.InnerText);
+                    }
                 }
+                if (isBackground && lastWord is not null)
+                    lastWord.Word = lastWord.Word.TrimEnd(')');
+                if (!isBackground)
+                {
+                    alrcLine.RawText = sb.ToString();
+                }
+                else
+                {
+                    alrcLine.RawText = sb.Remove(sb.Length - 1, 1).ToString();
+                }
+                lines.Add(alrcLine);
+
+                var subLineElements = element.GetElementsByTagName("span").Cast<XmlElement>()
+                    .Where(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-bg").ToList();
+                if (subLineElements is { Count: > 0 })
+                {
+                    foreach (var subLineElement in subLineElements)
+                    {
+                        ParseElement(subLineElement, style, true);
+                    }
+                }
+            }
+            
+            ParseElement(p, p.GetAttribute("ttm:agent"), false);
         }
 
         return alrc;
@@ -242,7 +216,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
             parent.AppendChild(lineElement);
             if (!string.IsNullOrWhiteSpace(line.Id))
             {
-                parentElements[line.Id] = lineElement;
+                parentElements[line.Id!] = lineElement;
             }
 
             lineElement.SetAttribute("begin", TimeSpan.FromMilliseconds(line.Start ?? 0).ToString(@"mm\:ss\.fff"));
