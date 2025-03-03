@@ -10,6 +10,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
     public ALRCFile Convert(string input)
     {
         var ttml = new XmlDocument();
+        ttml.PreserveWhitespace = true;
         var lines = new List<ALRCLine>();
         var alrc = new ALRCFile
         {
@@ -44,6 +45,30 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 });
                 isAdded = true;
             }
+            
+            
+            List<KeyValuePair<string, string>> pairs = [];
+            var author = string.Empty;
+            foreach (var metadata in head.GetElementsByTagName("amll:meta").Cast<XmlElement>().ToList())
+            {
+                var key = metadata.GetAttribute("key");
+                var value = metadata.GetAttribute("value");
+                pairs.Add(new KeyValuePair<string, string>(key, value));
+                if (key == "ttmlAuthorGithubLogin")
+                {
+                    author = value;
+                }
+            }
+            alrc.SongInfo = pairs.ToArray();
+            
+            // set author info
+            if (!string.IsNullOrWhiteSpace(author))
+            {
+                alrc.LyricInfo = new()
+                {
+                    Author = author
+                };
+            }
         }
 
         foreach (var p in ttml.GetElementsByTagName("p").Cast<XmlElement>().ToList())
@@ -62,27 +87,37 @@ public class AppleSyllableConverter : ILyricConverter<string>
             alrcLine.Transliteration = p.GetElementsByTagName("span").Cast<XmlElement>()
                 .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")?.InnerText;
             alrcLine.Words = new List<ALRCWord>();
-            var words = p.ChildNodes.Cast<XmlElement>().Where(t => t.Name == "span" && !t.HasAttribute("ttm:role"))
-                .ToList();
+            var words = p.ChildNodes;
             var sb = new StringBuilder();
-            foreach (var span in words)
+            ALRCWord? lastWord = null;
+            foreach (var wordEle in words)
             {
-                var word = new ALRCWord
+                
+                if (wordEle is XmlElement span)
                 {
-                    Word = span.InnerText
-                };
-                var wordBegin = span.GetAttribute("begin");
-                var wordEnd = span.GetAttribute("end");
-                if (span.HasAttribute(""))
-                {
+                    if (span.HasAttribute("ttm:role")) continue;
+                    var word = new ALRCWord
+                    {
+                        Word = span.InnerText
+                    };
+                    lastWord = word;
+                    var wordBegin = span.GetAttribute("begin");
+                    var wordEnd = span.GetAttribute("end");
+
+
+                    if (TimeSpan.TryParseExact(wordBegin, @"mm\:ss\.fff", null, out var start))
+                        word.Start = (int)start.TotalMilliseconds;
+                    if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
+                        word.End = (int)e.TotalMilliseconds;
+                    alrcLine.Words.Add(word);
+                    sb.Append(word.Word);
                 }
 
-                if (TimeSpan.TryParseExact(wordBegin, @"mm\:ss\.fff", null, out var start))
-                    word.Start = (int)start.TotalMilliseconds;
-                if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
-                    word.End = (int)e.TotalMilliseconds;
-                alrcLine.Words.Add(word);
-                sb.Append(word.Word);
+                if (wordEle is XmlWhitespace wsEle)
+                {
+                    if (lastWord != null) lastWord.Word += wsEle.InnerText;
+                    sb.Append(wsEle.InnerText);
+                }
             }
 
             alrcLine.RawText = sb.ToString();
@@ -103,25 +138,35 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     var bgWords = new List<ALRCWord>();
                     bgalrcLine.Words = bgWords;
                     var bgSb = new StringBuilder();
-                    var subWords = subLineElement.GetElementsByTagName("span").Cast<XmlElement>()
-                        .Where(t => !t.HasAttribute("ttm:role"))
-                        .ToList();
+                    var subWords = subLineElement.ChildNodes;
                     var isStart = true;
-                    foreach (var span in subWords)
+                    ALRCWord? lastW = null;
+                    foreach (var subWordEle in subWords)
                     {
-                        var word = new ALRCWord
+                        if (subWordEle is XmlElement span)
                         {
-                            Word = isStart ? span.InnerText.TrimStart('(') : span.InnerText
-                        };
-                        isStart = false;
-                        var wordBegin = span.GetAttribute("begin");
-                        var wordEnd = span.GetAttribute("end");
-                        if (TimeSpan.TryParseExact($"00:{wordBegin}", @"mm\:ss\.fff", null, out var start))
-                            word.Start = (int)start.TotalMilliseconds;
-                        if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
-                            word.End = (int)e.TotalMilliseconds;
-                        bgWords.Add(word);
-                        bgSb.Append(word.Word);
+                            var word = new ALRCWord
+                            {
+                                Word = isStart ? span.InnerText.TrimStart('(') : span.InnerText
+                            };
+                            lastW = word;
+                            isStart = false;
+                            var wordBegin = span.GetAttribute("begin");
+                            var wordEnd = span.GetAttribute("end");
+                            if (TimeSpan.TryParseExact($"00:{wordBegin}", @"mm\:ss\.fff", null, out var start))
+                                word.Start = (int)start.TotalMilliseconds;
+                            if (TimeSpan.TryParseExact(wordEnd, @"mm\:ss\.fff", null, out var e))
+                                word.End = (int)e.TotalMilliseconds;
+                            bgWords.Add(word);
+                            bgSb.Append(word.Word);
+                        }
+                        
+                        if (subWordEle is XmlWhitespace wsEle)
+                        {
+                            if (lastW is not null)
+                                lastW.Word += wsEle.InnerText;
+                            bgSb.Append(wsEle.InnerText);
+                        }
                     }
 
                     if (bgWords.LastOrDefault() is { } last)
@@ -137,6 +182,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
     public string ConvertBack(ALRCFile input)
     {
         var ttml = new XmlDocument();
+        ttml.PreserveWhitespace = true;
         var root = ttml.CreateElement("tt");
         root.SetAttribute("xmlns", "http://www.w3.org/ns/ttml");
         root.SetAttribute("xmlns:ttm", "http://www.w3.org/ns/ttml#metadata");

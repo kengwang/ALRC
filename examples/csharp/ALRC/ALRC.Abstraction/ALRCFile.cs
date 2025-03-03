@@ -15,7 +15,7 @@ public class ALRCFile
 
     [JsonProperty("si")]
     [JsonPropertyName("si")]
-    public Dictionary<string, string>? SongInfo { get; set; }
+    public KeyValuePair<string,string>[]? SongInfo { get; set; }
 
     [JsonProperty("h")]
     [JsonPropertyName("h")]

@@ -34,13 +34,14 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                 });
             }
         }
-
+        var songInfoList = new List<KeyValuePair<string, string>>();
         foreach (var songInfo in input.SongInfos)
         {
             if (string.IsNullOrWhiteSpace(songInfo.Param) || string.IsNullOrWhiteSpace(songInfo.Value)) continue;
-            alrc.SongInfo ??= new Dictionary<string, string>();
-            alrc.SongInfo[songInfo.Param] = songInfo.Value;
+            alrc.SongInfo ??= [];
+            songInfoList.Add(new KeyValuePair<string, string>(songInfo.Param, songInfo.Value));
         }
+        alrc.SongInfo = songInfoList.ToArray();
 
         // shallow copy start
         {
