@@ -112,4 +112,10 @@ public class MainWindowViewModel : IViewModel, INotifyPropertyChanged
         RootNavigation!.Navigate(nameof(PreviewPage));
         RootFrame.Navigate(_services.GetRequiredService<PreviewPage>());
     }
+    
+    public void NavigateToQualityCheck()
+    {
+        RootNavigation!.Navigate(nameof(QualityCheckPage));
+        RootFrame.Navigate(_services.GetRequiredService<QualityCheckPage>());
+    }
 }

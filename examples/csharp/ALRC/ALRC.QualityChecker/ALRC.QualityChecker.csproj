@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Checkers\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\ALRC.Abstraction\ALRC.Abstraction.csproj" />
     </ItemGroup>
 

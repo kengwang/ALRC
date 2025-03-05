@@ -242,4 +242,10 @@
     <data name="Btn_SongLines_AddTranslation" xml:space="preserve">
         <value>Add Translation</value>
     </data>
+    <data name="QualityCheck_Btn_StartScan" xml:space="preserve">
+        <value>Start Scan</value>
+    </data>
+    <data name="Nav_QualityCheck" xml:space="preserve">
+        <value>Quality Check</value>
+    </data>
 </root>

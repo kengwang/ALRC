@@ -240,7 +240,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
             }
 
             bool isFirst = true;
-            if (line.Words is not null)
+            if (line.Words is { Count: > 0 })
             {
                 foreach (var word in line.Words)
                 {

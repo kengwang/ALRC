@@ -292,4 +292,13 @@ public partial class LinesEditPage : Page
         LineSelector.Visibility =
             LineSelector.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
     }
+
+    private void ParentLineIdBox_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (LineSelector.SelectedItems.Count <= 1 || _viewModel.IsPreviewMode) return;
+        foreach (var editingAlrcLine in LineSelector.SelectedItems.Cast<EditingALRCLine>().ToList())
+        {
+            editingAlrcLine.ParentLineId = ParentLineIdBox.Text;
+        }
+    }
 }

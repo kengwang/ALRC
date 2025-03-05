@@ -88,5 +88,10 @@ namespace ALRC.Creator
         {
             ViewModel.NavigateToPreview();
         }
+
+        private void Nav_QualityCheck_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.NavigateToQualityCheck();
+        }
     }
 }

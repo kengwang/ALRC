@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -295,7 +296,7 @@ public partial class WordEditPage : Page
                     var lrcWord = new EditingALRCWord
                     {
                         Word = element.Element,
-                        Transliteration = string.IsNullOrWhiteSpace(romaji) ? null : $"{romaji} ",
+                        Transliteration = string.IsNullOrWhiteSpace(romaji) ? null : $"{romaji.Trim()} ",
                     };
                     line.Words ??= new();
 
@@ -308,6 +309,10 @@ public partial class WordEditPage : Page
 
                     line.Words.Add(lrcWord);
                 }
+                
+                line.Transliteration = string.Join("", line.Words?.Select(t => t.Transliteration) ?? []);
+
+
             }
             else
             {
@@ -364,6 +369,17 @@ public partial class WordEditPage : Page
                     goto parseOneChar;
                 }
             }
+        }
+    }
+
+    private void Btn_Line_AlignRightClick(object sender, MouseButtonEventArgs e)
+    {
+        // 行轴对齐词头尾
+        var lines = LineSelector.SelectedItems.Cast<EditingALRCLine>().Where(t => t.Words is { Count: > 0 }).ToList();
+        foreach (var line in lines)
+        {
+            line.Start = line.Words![0].Start ;
+            line.End = line.Words[^1].End;
         }
     }
 }

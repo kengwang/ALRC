@@ -68,6 +68,7 @@
     <ItemGroup>
       <ProjectReference Include="..\ALRC.Abstraction\ALRC.Abstraction.csproj" />
       <ProjectReference Include="..\ALRC.Converters\ALRC.Converters.csproj" />
+      <ProjectReference Include="..\ALRC.QualityChecker\ALRC.QualityChecker.csproj" />
     </ItemGroup>
 
     <ItemGroup>

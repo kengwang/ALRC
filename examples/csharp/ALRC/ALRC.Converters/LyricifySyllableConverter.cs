@@ -123,48 +123,47 @@ public class LyricifySyllableConverter : ILyricConverter<string>
             input.Lines.Insert(input.Lines.FindIndex(line => line.Id == attachedLine.ParentLineId) + 1, attachedLine);
         }
 
-        if (input.Lines.Any(line => line.Words is { Count: > 0 }))
+
+        // 逐词模式
+        foreach (var alrcLine in input.Lines)
         {
-            // 逐词模式
-            foreach (var alrcLine in input.Lines)
+            int attribute = 0;
+            if (input.Header?.Styles is not null &&
+                input.Header.Styles.FirstOrDefault(t => t.Id == alrcLine.LineStyle) is { } style)
             {
-                int attribute = 0;
-                if (input.Header?.Styles is not null && input.Header.Styles.FirstOrDefault(t=>t.Id == alrcLine.LineStyle) is { } style)
+                attribute += style.Type switch
                 {
-                    attribute += style.Type switch
-                    {
-                        ALRCStyleAccent.Normal => 1,
-                        ALRCStyleAccent.Background => 2,
-                        _ => 0
-                    } * 3;
-                    attribute += style.Position switch
-                    {
-                        ALRCStylePosition.Left => 1,
-                        ALRCStylePosition.Right => 2,
-                        _ => 0
-                    };
-                }
-
-                builder.Append($"[{attribute}]");
-
-                if (alrcLine.Words is { Count: > 0 })
+                    ALRCStyleAccent.Normal => 1,
+                    ALRCStyleAccent.Background => 2,
+                    _ => 0
+                } * 3;
+                attribute += style.Position switch
                 {
-                    for (var index = 0; index < alrcLine.Words.Count; index++)
-                    {
-                        var alrcLineWord = alrcLine.Words[index];
-                        builder.Append(
-                            $"{alrcLineWord.Word}" +
-                            $"({alrcLineWord.Start},{alrcLineWord.End - alrcLineWord.Start})");
-                    }
-                }
-                else
-                {
-                    builder.Append($"({alrcLine.Start},{alrcLine.End - alrcLine.Start})");
-                }
-
-                builder.AppendLine();
+                    ALRCStylePosition.Left => 1,
+                    ALRCStylePosition.Right => 2,
+                    _ => 0
+                };
             }
+
+            builder.Append($"[{attribute}]");
+            if (alrcLine.Words is { Count: > 0 })
+            {
+                for (var index = 0; index < alrcLine.Words.Count; index++)
+                {
+                    var alrcLineWord = alrcLine.Words[index];
+                    builder.Append(
+                        $"{alrcLineWord.Word}" +
+                        $"({alrcLineWord.Start},{alrcLineWord.End - alrcLineWord.Start})");
+                }
+            }
+            else
+            {
+                builder.Append($"{alrcLine.RawText}({alrcLine.Start},{alrcLine.End - alrcLine.Start})");
+            }
+
+            builder.AppendLine();
         }
+
 
         return builder.ToString();
     }

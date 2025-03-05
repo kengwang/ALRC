@@ -94,6 +94,7 @@
                         <Button
                             Grid.Column="0"
                             Click="Btn_Line_Align"
+                            MouseRightButtonDown="Btn_Line_AlignRightClick"
                             Content="{x:Static t:Languages.Btn_WordEdit_Line_Align}" />
                         <Button
                             Grid.Column="1"
@@ -130,7 +131,7 @@
                             
                             Grid.Column="1"
                             HorizontalAlignment="Left"
-                            Text="{Binding FocusingWord.Start}" />
+                            Text="{Binding FocusingWord.Start, Mode=TwoWay}" />
                     </Grid>
 
                     <Grid Margin="0,5" DockPanel.Dock="Top">
@@ -147,7 +148,7 @@
                         <TextBox
                             Grid.Column="1"
                             HorizontalAlignment="Left"
-                            Text="{Binding FocusingWord.End}" />
+                            Text="{Binding FocusingWord.End, Mode=TwoWay}" />
                     </Grid>
 
                     <Grid Margin="0,5" DockPanel.Dock="Top">

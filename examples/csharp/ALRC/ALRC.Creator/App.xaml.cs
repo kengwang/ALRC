@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ALRC.Creator.Extensions;
 using ALRC.Creator.Localization;
+using ALRC.QualityChecker.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ALRC.Creator
@@ -33,6 +34,7 @@ namespace ALRC.Creator
         {
             var services = new ServiceCollection();
             services.AddMvvm();
+            services.AddAllImplementationsOf<QualityCheckerBase>(scanningAssembly: typeof(QualityCheckerBase).Assembly);
             DI.Services = services.BuildServiceProvider();
         }
     }

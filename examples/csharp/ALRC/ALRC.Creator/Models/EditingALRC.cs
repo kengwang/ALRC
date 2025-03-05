@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using ALRC.Abstraction;
 using ALRC.Creator.Interfaces;
 
 namespace ALRC.Creator.Models;
@@ -103,7 +102,7 @@ public class EditingALRCWord : IModel
 public class EditingALRCLine : IModel
 {
     private int _type;
-    private long _start;    
+    private long _start;
     private long _end;
     private string? _lineStyle;
     private string? _comment;
@@ -196,7 +195,6 @@ public class EditingALRCLine : IModel
         return true;
     }
 }
-
 
 public class EditingALRCStyle : IModel
 {

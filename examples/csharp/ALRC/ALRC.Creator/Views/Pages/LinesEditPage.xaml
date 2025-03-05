@@ -188,6 +188,7 @@
                         <TextBox
                             x:Name="ParentLineIdBox"
                             Grid.Column="1"
+                            TextChanged="ParentLineIdBox_OnTextChanged"
                             Text="{Binding FocusingLine.ParentLineId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 

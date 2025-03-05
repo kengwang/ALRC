@@ -1,0 +1,44 @@
+﻿<Page x:Class="ALRC.Creator.Views.Pages.QualityCheckPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ALRC.Creator.Views.Pages"
+      xmlns:t="clr-namespace:ALRC.Creator.Localization"
+      xmlns:viewModels="clr-namespace:ALRC.Creator.Models.ViewModels"
+      xmlns:models="clr-namespace:ALRC.QualityChecker.Models;assembly=ALRC.QualityChecker"
+      mc:Ignorable="d"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      d:DataContext="{d:DesignInstance viewModels:QualityCheckPageViewModel,
+                                     IsDesignTimeCreatable=False}"
+      Title="QualityCheckPage">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button 
+            Grid.Row="0"
+            x:Name="BtnStartScan"
+            Click="BtnStartScan_OnClick"
+            Content="{x:Static t:Languages.QualityCheck_Btn_StartScan}" />
+        <ListView
+            x:Name="IssueListView"
+            ItemsSource="{Binding Issues}"
+            MouseDoubleClick="IssueListView_OnMouseDoubleClick"
+            SelectedItem="{Binding SelectedIssue}"
+            SelectionMode="Single"
+            Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:Issue}">
+                    <TextBlock>
+                        <Run Text="{Binding ResourceIdentifier}"></Run>
+                        <Run>: </Run>
+                        <Run Text="{Binding Message}"></Run>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

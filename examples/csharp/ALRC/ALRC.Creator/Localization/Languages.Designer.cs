@@ -519,6 +519,15 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 质量检测.
+        /// </summary>
+        public static string Nav_QualityCheck {
+            get {
+                return ResourceManager.GetString("Nav_QualityCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 工程.
         /// </summary>
         public static string Nav_Save {
@@ -551,6 +560,15 @@ namespace ALRC.Creator.Localization {
         public static string Nav_WordEdit {
             get {
                 return ResourceManager.GetString("Nav_WordEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 开始扫描.
+        /// </summary>
+        public static string QualityCheck_Btn_StartScan {
+            get {
+                return ResourceManager.GetString("QualityCheck_Btn_StartScan", resourceCulture);
             }
         }
         

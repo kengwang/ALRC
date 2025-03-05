@@ -69,6 +69,12 @@
                         PageTag="WordEditPage"
                         PageType="{x:Type pages:BlankPage}" />
                     <ui:NavigationItem
+                        Click="Nav_QualityCheck_Click"
+                        Content="{x:Static t:Languages.Nav_QualityCheck}"
+                        Icon="DocumentCheckmark24"
+                        PageTag="QualityCheckPage"
+                        PageType="{x:Type pages:BlankPage}" />
+                    <ui:NavigationItem
                         Click="Nav_Convert_Click"
                         Content="{x:Static t:Languages.Nav_Convert}"
                         Icon="ArrowSort24"

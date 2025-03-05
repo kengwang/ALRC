@@ -353,4 +353,10 @@
     <data name="Btn_SongLines_AddTranslation" xml:space="preserve">
         <value>添加翻译</value>
     </data>
+    <data name="QualityCheck_Btn_StartScan" xml:space="preserve">
+        <value>开始扫描</value>
+    </data>
+    <data name="Nav_QualityCheck" xml:space="preserve">
+        <value>质量检测</value>
+    </data>
 </root>
