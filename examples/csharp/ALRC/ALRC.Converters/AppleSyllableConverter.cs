@@ -118,6 +118,12 @@ public class AppleSyllableConverter : ILyricConverter<string>
                         sb.Append(word.Word);
                     }
 
+                    if (wordEle is XmlText textEle)
+                    {
+                        if (lastWord != null) lastWord.Word += textEle.InnerText;
+                        sb.Append(textEle.InnerText);
+                    }
+                    
                     if (wordEle is XmlWhitespace wsEle)
                     {
                         if (lastWord != null) lastWord.Word += wsEle.InnerText;
@@ -188,7 +194,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
         Dictionary<string, XmlElement> parentElements = new Dictionary<string, XmlElement>();
         foreach (var line in input.Lines)
         {
-            if (string.IsNullOrWhiteSpace(line.RawText) && line.Words is not { Count: > 0 }) continue;
+            // if (string.IsNullOrWhiteSpace(line.RawText) && line.Words is not { Count: > 0 }) continue;
             bool isSubline = false;
             var parent = div;
             var lineElement = ttml.CreateElement("p");
