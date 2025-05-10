@@ -2,11 +2,11 @@
 using ALRC.Abstraction;
 using Opportunity.LrcParser;
 
-namespace ALRC.Converters;
+namespace ALRC.Converters.Enhancers;
 
 public class LrcTranslationEnhancer : ILyricEnhancer<string>
 {
-    public string Enhance(ALRCFile input)
+    public string Extract(ALRCFile input)
     {
         var builder = new StringBuilder();
         // Order Lines
@@ -31,7 +31,7 @@ public class LrcTranslationEnhancer : ILyricEnhancer<string>
         return builder.ToString();
     }
 
-    public ALRCFile Deserialize(string input, ALRCFile target)
+    public ALRCFile Enhance(string input, ALRCFile target)
     {
         var parseResult = Lyrics.Parse(input);
         foreach (var lyricsLine in parseResult.Lyrics.Lines)

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ALRC.Abstraction;
 using ALRC.Converters;
+using ALRC.Converters.Enhancers;
 using ALRC.Creator.Models;
 using ALRC.Creator.Models.ViewModels;
 using Microsoft.Win32;
@@ -86,7 +87,7 @@ public partial class ConvertPage : Page
         var trLine =
             alrc.Lines.FirstOrDefault(t => !string.IsNullOrWhiteSpace(t.Translation));
 
-        var lrcText = converter.Enhance(alrc);
+        var lrcText = converter.Extract(alrc);
         var dialog = new SaveFileDialog();
         dialog.Filter = "LRC 文件|*.lrc";
         if (dialog.ShowDialog() is true)

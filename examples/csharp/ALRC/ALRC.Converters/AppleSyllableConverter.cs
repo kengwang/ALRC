@@ -74,7 +74,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
 
         foreach (var p in ttml.GetElementsByTagName("p").Cast<XmlElement>().ToList())
         {
-            void ParseElement(XmlElement element, string style, bool isBackground)
+            void ParseElement(XmlElement element, string style, bool isBackground, string? parentLineId = null)
             {
                 var alrcLine = new ALRCLine();
                 alrcLine.LineStyle = style + (isBackground ? "_bg" : string.Empty);
@@ -87,6 +87,8 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 alrcLine.Translation = element.GetElementsByTagName("span").Cast<XmlElement>()
                     .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
                     ?.InnerText;
+                alrcLine.ParentLineId = parentLineId;
+                alrcLine.Id = element.HasAttribute("itunes:key") ? element.GetAttribute("itunes:key").TrimStart('L') : null;
                 alrcLine.Transliteration = element.GetElementsByTagName("span").Cast<XmlElement>()
                     .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")
                     ?.InnerText;
@@ -121,7 +123,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     if (wordEle is XmlText textEle)
                     {
                         if (lastWord != null) lastWord.Word += textEle.InnerText;
-                        sb.Append(textEle.InnerText);
+                        sb.Append(isStart ? textEle.InnerText.TrimStart('(') : textEle.InnerText);
                     }
                     
                     if (wordEle is XmlWhitespace wsEle)
@@ -148,7 +150,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 {
                     foreach (var subLineElement in subLineElements)
                     {
-                        ParseElement(subLineElement, style, true);
+                        ParseElement(subLineElement, style, true, alrcLine.Id);
                     }
                 }
             }

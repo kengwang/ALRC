@@ -4,6 +4,6 @@ namespace ALRC.Converters;
 
 public interface ILyricEnhancer<T>
 {
-    public T Enhance(ALRCFile input);
-    public ALRCFile Deserialize(T input, ALRCFile target);
+    public T Extract(ALRCFile input);
+    public ALRCFile Enhance(T input, ALRCFile target);
 }
