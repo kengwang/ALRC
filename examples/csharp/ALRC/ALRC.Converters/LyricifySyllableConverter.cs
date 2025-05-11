@@ -72,14 +72,20 @@ public class LyricifySyllableConverter : ILyricConverter<string>
             }
         };
         var originalLines = input.Replace("\r\n", "\n").Split('\n');
-
+        var setLastLineWithCurrentStartTime = false;
         foreach (var originalLine in originalLines)
         {
             if (originalLine.Length < 3) continue;
-            var line = new ALRCLine()
+            var line = new ALRCLine();
+            if (originalLine.Length == 3)
             {
-                Words = new List<ALRCWord>()
-            };
+                line.Start = lines.LastOrDefault()?.End;
+                setLastLineWithCurrentStartTime = true;
+                lines.Add(line);
+                continue;
+            }
+
+            line.Words = new List<ALRCWord>();
             var propertyEnd = originalLine.IndexOf(']');
             var property = originalLine.Substring(1, propertyEnd - 1);
             if (property.Length != 1 || !char.IsNumber(property[0])) continue;
@@ -104,6 +110,13 @@ public class LyricifySyllableConverter : ILyricConverter<string>
             line.RawText = sb.ToString();
             line.Start = line.Words[0].Start;
             line.End = line.Words[^1].End;
+
+            if (setLastLineWithCurrentStartTime && lines.LastOrDefault() is { } lastLine)
+            {
+                lastLine.End = line.Start;
+                setLastLineWithCurrentStartTime = false;
+            }
+            
             lines.Add(line);
         }
 

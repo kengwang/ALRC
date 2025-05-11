@@ -84,9 +84,6 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     alrcLine.Start = (int)startLine.TotalMilliseconds;
                 if (TimeSpan.TryParseExact(end, @"mm\:ss\.fff", null, out var endLine))
                     alrcLine.End = (int)endLine.TotalMilliseconds;
-                alrcLine.Translation = element.GetElementsByTagName("span").Cast<XmlElement>()
-                    .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
-                    ?.InnerText;
                 alrcLine.ParentLineId = parentLineId;
                 alrcLine.Id = element.HasAttribute("itunes:key") ? element.GetAttribute("itunes:key").TrimStart('L') : null;
                 alrcLine.Translation = element.ChildNodes.OfType<XmlElement>().FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
@@ -99,6 +96,8 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 var sb = new StringBuilder();
                 ALRCWord? lastWord = null;
                 var isStart = isBackground;
+                var transliterationElement = alrcLine.Transliteration?.Split([' '], StringSplitOptions.RemoveEmptyEntries) ?? [];
+                var transliterationBeat = 0;
                 foreach (var wordEle in words)
                 {
                     if (wordEle is XmlElement span)
@@ -120,6 +119,26 @@ public class AppleSyllableConverter : ILyricConverter<string>
                             word.End = (int)e.TotalMilliseconds;
                         alrcLine.Words.Add(word);
                         sb.Append(word.Word);
+
+                        if (false)
+                        {
+                            // 这个地方完全不太规范, 曾尝试解析, 但是歌词太杂了, 干不动!
+                            // append the transliteration
+                            var aggregate = word.Word.Trim().Length;
+                            if (span.HasAttribute("amll:empty-beat"))
+                            {
+                                aggregate = int.Parse(span.GetAttribute("amll:empty-beat")) + 1;
+                            }
+
+                            if (transliterationBeat + aggregate <= transliterationElement.Length)
+                            {
+                                var wordTransliteration = string.Join(" ",
+                                    transliterationElement.Skip(transliterationBeat).Take(aggregate));
+                                word.Transliteration = wordTransliteration;
+                            }
+
+                            transliterationBeat += aggregate;
+                        }
                     }
 
                     if (wordEle is XmlText textEle)
@@ -261,6 +280,17 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     span.InnerText = isFirst && isSubline ? $"({word.Word}" : word.Word;
                     lineElement.AppendChild(span);
                     isFirst = false;
+                    var trArr = word.Transliteration?.Trim().Split(' ');
+                    if (trArr is { Length: > 0 })
+                    {
+                        // add empty beat
+                        var actualWordLength = word.Word.Trim().Length;
+                        var emptyBeat = trArr.Length - actualWordLength;
+                        if (emptyBeat > 0)
+                        {
+                            span.SetAttribute("empty-beat", "http://www.example.com/ns/amll", emptyBeat.ToString());
+                        }
+                    }
                 }
 
                 if (isSubline && lineElement.LastChild is not null)

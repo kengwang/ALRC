@@ -309,16 +309,14 @@ public partial class WordEditPage : Page
 
                     line.Words.Add(lrcWord);
                 }
-                
-                line.Transliteration = string.Join("", line.Words?.Select(t => t.Transliteration) ?? []);
-
-
             }
             else
             {
                 var divitions = await kawazu.GetDivisions(line.Text, To.Romaji, Mode.Spaced);
                 SetRomajiKaraoke(divitions, line.Words);
             }
+
+            line.Transliteration = string.Join("", line.Words?.Select(t => t.Transliteration) ?? []);
         }
     }
 
@@ -378,7 +376,7 @@ public partial class WordEditPage : Page
         var lines = LineSelector.SelectedItems.Cast<EditingALRCLine>().Where(t => t.Words is { Count: > 0 }).ToList();
         foreach (var line in lines)
         {
-            line.Start = line.Words![0].Start ;
+            line.Start = line.Words![0].Start;
             line.End = line.Words[^1].End;
         }
     }
