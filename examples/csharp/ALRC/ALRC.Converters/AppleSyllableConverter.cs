@@ -89,7 +89,9 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     ?.InnerText;
                 alrcLine.ParentLineId = parentLineId;
                 alrcLine.Id = element.HasAttribute("itunes:key") ? element.GetAttribute("itunes:key").TrimStart('L') : null;
-                alrcLine.Transliteration = element.GetElementsByTagName("span").Cast<XmlElement>()
+                alrcLine.Translation = element.ChildNodes.OfType<XmlElement>().FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
+                    ?.InnerText;
+                alrcLine.Transliteration = element.ChildNodes.OfType<XmlElement>()
                     .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")
                     ?.InnerText;
                 alrcLine.Words = new List<ALRCWord>();
@@ -144,7 +146,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 }
                 lines.Add(alrcLine);
 
-                var subLineElements = element.GetElementsByTagName("span").Cast<XmlElement>()
+                var subLineElements = element.ChildNodes.OfType<XmlElement>()
                     .Where(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-bg").ToList();
                 if (subLineElements is { Count: > 0 })
                 {
@@ -169,6 +171,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
         root.SetAttribute("xmlns", "http://www.w3.org/ns/ttml");
         root.SetAttribute("xmlns:ttm", "http://www.w3.org/ns/ttml#metadata");
         root.SetAttribute("xmlns:itunes", "http://music.apple.com/lyric-ttml-internal");
+        root.SetAttribute("xmlns:amll", "http://www.example.com/ns/amll");
         ttml.AppendChild(root);
 
         var head = ttml.CreateElement("head");
@@ -242,7 +245,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
             {
                 var span = ttml.CreateElement("span");
                 span.SetAttribute("role", "http://www.w3.org/ns/ttml#metadata",
-                    "x-translation"); // romaji not roman, but AMLL use it.
+                    "x-translation");
                 span.InnerText = line.Translation!;
                 lineElement.AppendChild(span);
             }
