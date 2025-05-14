@@ -85,8 +85,11 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 if (TimeSpan.TryParseExact(end, @"mm\:ss\.fff", null, out var endLine))
                     alrcLine.End = (int)endLine.TotalMilliseconds;
                 alrcLine.ParentLineId = parentLineId;
-                alrcLine.Id = element.HasAttribute("itunes:key") ? element.GetAttribute("itunes:key").TrimStart('L') : null;
-                alrcLine.Translation = element.ChildNodes.OfType<XmlElement>().FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
+                alrcLine.Id = element.HasAttribute("itunes:key")
+                    ? element.GetAttribute("itunes:key").TrimStart('L')
+                    : null;
+                alrcLine.Translation = element.ChildNodes.OfType<XmlElement>().FirstOrDefault(t =>
+                        t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-translation")
                     ?.InnerText;
                 alrcLine.Transliteration = element.ChildNodes.OfType<XmlElement>()
                     .FirstOrDefault(t => t.HasAttribute("ttm:role") && t.GetAttribute("ttm:role") == "x-roman")
@@ -96,7 +99,8 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 var sb = new StringBuilder();
                 ALRCWord? lastWord = null;
                 var isStart = isBackground;
-                var transliterationElement = alrcLine.Transliteration?.Split([' '], StringSplitOptions.RemoveEmptyEntries) ?? [];
+                var transliterationElement =
+                    alrcLine.Transliteration?.Split([' '], StringSplitOptions.RemoveEmptyEntries) ?? [];
                 var transliterationBeat = 0;
                 foreach (var wordEle in words)
                 {
@@ -146,13 +150,14 @@ public class AppleSyllableConverter : ILyricConverter<string>
                         if (lastWord != null) lastWord.Word += textEle.InnerText;
                         sb.Append(isStart ? textEle.InnerText.TrimStart('(') : textEle.InnerText);
                     }
-                    
+
                     if (wordEle is XmlWhitespace wsEle)
                     {
                         if (lastWord != null) lastWord.Word += wsEle.InnerText;
                         sb.Append(wsEle.InnerText);
                     }
                 }
+
                 if (isBackground && lastWord is not null)
                     lastWord.Word = lastWord.Word.TrimEnd(')');
                 if (!isBackground)
@@ -163,6 +168,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
                 {
                     alrcLine.RawText = sb.Remove(sb.Length - 1, 1).ToString();
                 }
+
                 lines.Add(alrcLine);
 
                 var subLineElements = element.ChildNodes.OfType<XmlElement>()
@@ -175,7 +181,7 @@ public class AppleSyllableConverter : ILyricConverter<string>
                     }
                 }
             }
-            
+
             ParseElement(p, p.GetAttribute("ttm:agent"), false);
         }
 
