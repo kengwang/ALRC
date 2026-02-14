@@ -248,4 +248,13 @@
     <data name="Nav_QualityCheck" xml:space="preserve">
         <value>Quality Check</value>
     </data>
+    <data name="StyleEdit_Style_Singers" xml:space="preserve">
+        <value>Singers:</value>
+    </data>
+    <data name="StyleEdit_Style_Singers_Identify" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="StyleEdit_Style_Singers_DisplayName" xml:space="preserve">
+        <value>Display Name</value>
+    </data>
 </root>

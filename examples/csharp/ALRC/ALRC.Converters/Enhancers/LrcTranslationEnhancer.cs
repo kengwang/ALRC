@@ -38,9 +38,7 @@ public class LrcTranslationEnhancer : ILyricEnhancer<string>
         {
             var lrcTime = (long)(lyricsLine.Timestamp - DateTime.MinValue).TotalMilliseconds;
             var line = target.Lines.FirstOrDefault(t => t.Start == lrcTime);
-            if (line is null)
-                continue;
-            line.Translation = lyricsLine.Content;
+            line?.Translation = lyricsLine.Content;
         }
 
         return target;

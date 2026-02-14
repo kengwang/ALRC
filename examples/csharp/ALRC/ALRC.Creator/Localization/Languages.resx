@@ -359,4 +359,13 @@
     <data name="Nav_QualityCheck" xml:space="preserve">
         <value>质量检测</value>
     </data>
+    <data name="StyleEdit_Style_Singers" xml:space="preserve">
+        <value>歌手:</value>
+    </data>
+    <data name="StyleEdit_Style_Singers_Identify" xml:space="preserve">
+        <value>ID</value>
+    </data>
+    <data name="StyleEdit_Style_Singers_DisplayName" xml:space="preserve">
+        <value>显示名称</value>
+    </data>
 </root>

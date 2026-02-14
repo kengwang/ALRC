@@ -672,6 +672,33 @@ namespace ALRC.Creator.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 歌手:.
+        /// </summary>
+        public static string StyleEdit_Style_Singers {
+            get {
+                return ResourceManager.GetString("StyleEdit_Style_Singers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 显示名称.
+        /// </summary>
+        public static string StyleEdit_Style_Singers_DisplayName {
+            get {
+                return ResourceManager.GetString("StyleEdit_Style_Singers_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string StyleEdit_Style_Singers_Identify {
+            get {
+                return ResourceManager.GetString("StyleEdit_Style_Singers_Identify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 类型.
         /// </summary>
         public static string StyleEdit_Style_Type {

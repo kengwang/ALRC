@@ -30,7 +30,12 @@ public class EditableALRCConverter : ILyricConverter<EditingALRC>
                     Position = (ALRCStylePosition)style.Position,
                     Color = string.IsNullOrWhiteSpace(style.Color) ? null : style.Color,
                     Type = (ALRCStyleAccent)style.Type,
-                    HiddenOnBlur = style.Hidden
+                    HiddenOnBlur = style.Hidden,
+                    Singers = style.Singers.Select(t=>new ALRCStyleSinger
+                    {
+                        Id = t.Identify,
+                        Name = t.DisplayName
+                    }).ToList()
                 });
             }
         }

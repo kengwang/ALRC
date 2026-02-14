@@ -144,7 +144,7 @@ public partial class LinesEditPage : Page
         {
             _viewModel.EditingAlrc.Lines.Clear();
             string? lang = null;
-            if (_viewModel.QuickInputTexts.StartsWith("lang:"))
+            if (_viewModel.QuickInputTexts.StartsWith("[lang:"))
             {
                 lang = _viewModel.QuickInputTexts.Substring(6, _viewModel.QuickInputTexts.IndexOf(']') - 6);
             }

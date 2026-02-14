@@ -227,11 +227,24 @@ public class EditingALRCStyle : IModel
         set => SetField(ref _position, value);
     }
 
+    public ObservableCollection<EditingALRCStyleSinger> Singers
+    {
+        get => _singers;
+        set => SetField(ref _singers, value);
+    }
+    
+    public class EditingALRCStyleSinger
+    {
+        public string Identify { get; set; } = string.Empty;
+        public string DisplayName { get; set; } = string.Empty;
+    }
+
     private string _id = string.Empty;
     private int _position = 0;
     private string? _color;
     private int _type = 0;
     private bool _hidden = false;
+    private ObservableCollection<EditingALRCStyleSinger> _singers = new();
 
     public string Id
     {

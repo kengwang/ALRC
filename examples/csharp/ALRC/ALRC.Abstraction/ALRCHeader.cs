@@ -31,6 +31,22 @@ public class ALRCStyle
     [JsonProperty("h")]
     [JsonPropertyName("h")]
     public bool HiddenOnBlur { get; set; } = false;
+
+    [JsonProperty("sg")]
+    [JsonPropertyName("sg")]
+    public List<ALRCStyleSinger>? Singers { get; set; } = [];
+    
+}
+
+public class ALRCStyleSinger
+{
+    [JsonProperty("id")]
+    [JsonPropertyName("id")]
+    public required string Id { get; set; }
+
+    [JsonProperty("n")]
+    [JsonPropertyName("n")]
+    public required string Name { get; set; }
 }
 
 public enum ALRCStylePosition

@@ -140,6 +140,8 @@ public class LyricifySyllableConverter : ILyricConverter<string>
         // 逐词模式
         foreach (var alrcLine in input.Lines)
         {
+            if (string.IsNullOrEmpty(alrcLine.RawText) && alrcLine.Words is not {Count: > 0})
+                continue;
             int attribute = 0;
             if (input.Header?.Styles is not null &&
                 input.Header.Styles.FirstOrDefault(t => t.Id == alrcLine.LineStyle) is { } style)

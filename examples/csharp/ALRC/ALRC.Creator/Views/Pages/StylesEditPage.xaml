@@ -8,6 +8,7 @@
     xmlns:models="clr-namespace:ALRC.Creator.Models"
     xmlns:t="clr-namespace:ALRC.Creator.Localization"
     xmlns:viewModels="clr-namespace:ALRC.Creator.Models.ViewModels"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{x:Static t:Languages.Nav_StylesEditing}"
     d:DataContext="{d:DesignInstance viewModels:StylesPageViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -137,7 +138,44 @@
                         Content="{x:Static t:Languages.StyleEdit_Style_Hidden}" />
                     <CheckBox Grid.Column="1" IsChecked="{Binding FocusingStyle.Hidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
-
+                
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Margin="5,0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Content="{x:Static t:Languages.StyleEdit_Style_Singers}" />
+                    <ui:DataGrid
+                        Grid.Column="1"
+                        Padding="5"
+                        AreRowDetailsFrozen="False"
+                        CanUserAddRows="True"
+                        CanUserDeleteRows="True"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ColumnHeaderHeight="32"
+                        FrozenColumnCount="1"
+                        GridLinesVisibility="All"
+                        AutoGenerateColumns="False"
+                        HeadersVisibility="All"
+                        IsReadOnly="False"
+                        Height="150"
+                        VerticalScrollBarVisibility="Auto"
+                        ItemsSource="{Binding FocusingStyle.Singers, Mode=TwoWay}"
+                        RowDetailsVisibilityMode="Collapsed"
+                        SelectionMode="Single">
+                        <ui:DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Identify, Mode=TwoWay}" Header="{x:Static t:Languages.StyleEdit_Style_Singers_Identify}" />
+                            <DataGridTextColumn Binding="{Binding DisplayName, Mode=TwoWay}" Header="{x:Static t:Languages.StyleEdit_Style_Singers_DisplayName}" />
+                        </ui:DataGrid.Columns>
+                    </ui:DataGrid>
+                </Grid>
+                
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100" />
@@ -151,7 +189,7 @@
                         Content="{x:Static t:Languages.StyleEdit_Style_Preview}" />
                     <ContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" x:Name="PreviewControlContainer" Grid.Column="1" />
                 </Grid>
-
+                
             </StackPanel>
         </Grid>
     </Grid>
